@@ -1,0 +1,14 @@
+1. 开发域名：dev.ffs.com
+	本地hosts文件需要作映射 127.0.0.1 dev.ffs.com
+
+2. 开发环境：xampp(php > 5.5)
+
+3. 代码托管在github，地址：https://github.com/jh147/FFS.git
+
+3. 下载代码后，导入数据库文件 （在mysql客户端中执行db/ffs.sql文件即可）
+
+4. 后台默认账号密码
+	admin
+	123456
+
+5. 
