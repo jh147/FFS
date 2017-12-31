@@ -1,1 +1,3 @@
-console.log(12);
+define(function (require, exports, module) { 
+	console.log(12);
+})

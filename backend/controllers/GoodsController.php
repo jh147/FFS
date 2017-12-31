@@ -7,9 +7,9 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * Agent controller
+ * Goods controller
  */
-class AgentController extends Controller
+class GoodsController extends Controller
 {
     /**
      * @inheritdoc
@@ -26,7 +26,7 @@ class AgentController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['edit'],
+                        'actions' => ['goods-edit'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -36,7 +36,7 @@ class AgentController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'index' => ['get'],
-                    'edit' => ['get'],
+                    'goods-edit' => ['get'],
                 ],
             ],
         ];
@@ -70,8 +70,8 @@ class AgentController extends Controller
      *
      * @return string
      */
-    public function actionEdit()
+    public function actionGoodsEdit()
     {
-        return $this->render('edit');
+        return $this->render('goods-edit');
     }
 }

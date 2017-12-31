@@ -22,7 +22,7 @@ $this->title = '代理人';
             <div class="grid-btns clearfix">
                 <div class="pull-right">
                     <button type="button" class="btn btn-primary grid-btn-sep">导入</button>
-                    <button type="button" class="btn btn-primary" id="getPage">新增</button>
+                    <a type="button" class="btn btn-primary" id="editAgent" href="/agent/edit">新增</a>
                 </div>
             </div>
 
@@ -70,5 +70,8 @@ $this->title = '代理人';
         <div class="form form-base">
             <input type="text" class="form-control" value="<%- name%>" id="newname">
         </div>
+    </script>
+    <script type="text/javascript">
+        seajs.use('/js/agent/agent-index.js');
     </script>
 </div>

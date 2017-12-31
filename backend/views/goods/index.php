@@ -2,25 +2,22 @@
 
 /* @var $this yii\web\View */
 
-$this->title = '航班';
+$this->title = '货物种类';
 ?>
-<div class="manage-content">
+<div>
+    
     <ul class="search-con clearfix">
         <li>
-            <span>航班号</span>
-            <input type="text" class="form-control" placeholder="" style="width:100px;">
+            <span>航站</span>
+            <input type="text" class="form-control" placeholder="" style="width:200px;">
         </li>
         <li>
-            <span>始发站</span>
-            <input type="text" class="form-control" placeholder="" style="width:100px;">
+            <span>运价代码</span>
+            <input type="text" class="form-control" placeholder="" style="width:200px;">
         </li>
-        <li class="search-inline">
-            <span>开始日期</span>
-            <input type="text" readonly="readonly" class="form-control Wdate" id="stime" style="width:200px;">
-        </li>
-        <li class="search-inline">
-            <span>结束日期</span>
-            <input type="text" readonly="readonly" class="form-control Wdate" id="etime" style="width:200px;">
+        <li>
+            <span>品名</span>
+            <input type="text" class="form-control" placeholder="" style="width:200px;">
         </li>
         <li>
             <span>&nbsp;</span>
@@ -28,15 +25,15 @@ $this->title = '航班';
         </li>
     </ul>
 
-
     <div class="grid">
         <div class="grid-toolbar">
             <div class="grid-btns clearfix">
                 <div class="pull-right">
                     <button type="button" class="btn btn-primary grid-btn-sep">导入</button>
-                    <a type="button" class="btn btn-primary" href="/flight/flight-edit/">新增</a>
+                    <a type="button" class="btn btn-primary" id="editAgent" href="/goods/goods-edit">新增</a>
                 </div>
             </div>
+
         </div>
         
         <div class="grid-content" id="grid">
@@ -44,13 +41,10 @@ $this->title = '航班';
                 <thead>
                   <tr>
                     <th width="60" class="align-c">序号</th>
-                    <th>航班号</th>
-                    <th>机型</th>
-                    <th>航线</th>
-                    <th>班期</th>
-                    <th>始发站</th>
-                    <th>开始日期</th>
-                    <th>结束日期</th>
+                    <th>航站</th>
+                    <th>运价代码</th>
+                    <th>品名</th>
+                    <th>操作</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -82,5 +76,8 @@ $this->title = '航班';
         <div class="form form-base">
             <input type="text" class="form-control" value="<%- name%>" id="newname">
         </div>
+    </script>
+    <script type="text/javascript">
+        seajs.use('/js/agent/agent-index.js');
     </script>
 </div>

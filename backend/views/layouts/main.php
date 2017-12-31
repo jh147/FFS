@@ -22,6 +22,7 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <script type="text/javascript" src="/js/common/global.js"></script>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -78,8 +79,8 @@ AppAsset::register($this);
                     <dd class="<?php if($this->title == '航班'){ echo 'on';} ?>">
                         <a href="/flight/index">航班</a>
                     </dd>
-                    <dd>
-                        <a href="javascript:;">货物种类</a>
+                    <dd class="<?php if($this->title == '货物种类'){ echo 'on';} ?>">
+                        <a href="/goods/index">货物种类</a>
                     </dd>
                 </dl>
                 <dl>

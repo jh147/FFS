@@ -25,12 +25,18 @@ class FlightController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                    [
+                        'actions' => ['flight-edit'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'index' => ['get'],
+                    'flight-edit' => ['get'],
                 ],
             ],
         ];
@@ -56,6 +62,15 @@ class FlightController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function actionFlightEdit()
+    {
+        return $this->render('flight-edit');
     }
     
 }
