@@ -12,6 +12,7 @@ use yii\filters\AccessControl;
 class FlightController extends Controller
 {
     /**
+     * 基础数据 - 航班
      * @inheritdoc
      */
     public function behaviors()

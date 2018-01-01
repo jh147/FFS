@@ -12,6 +12,7 @@ use yii\filters\AccessControl;
 class GoodsController extends Controller
 {
     /**
+     * 基础数据 - 货物种类
      * @inheritdoc
      */
     public function behaviors()

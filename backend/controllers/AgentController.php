@@ -7,6 +7,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
+ * 基础数据 - 代理人
  * Agent controller
  */
 class AgentController extends Controller
