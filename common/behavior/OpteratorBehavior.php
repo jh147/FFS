@@ -72,7 +72,7 @@ use yii\db\BaseActiveRecord;
  * @author Alexander Kochetov <creocoder@gmail.com>
  * @since 2.0
  */
-class OpteratorTimeBehavior extends AttributeBehavior
+class OpteratorBehavior extends AttributeBehavior
 {
     /**
      * @var string the attribute that will receive timestamp value

@@ -2,14 +2,13 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
  * InputController
  */
-class InputController extends Controller
+class InputController extends ControllerBase
 {
     /**
      * @inheritdoc

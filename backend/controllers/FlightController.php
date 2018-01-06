@@ -2,14 +2,13 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
  * Flight controller
  */
-class FlightController extends Controller
+class FlightController extends ControllerBase
 {
     /**
      * 基础数据 - 航班
