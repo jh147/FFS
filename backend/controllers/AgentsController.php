@@ -38,7 +38,7 @@ class AgentsController extends ControllerBase
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'save', 'edit', 'ajax-get-list', 'import'],
+                        'actions' => ['index', 'save', 'edit', 'delete', 'ajax-get-list', 'import'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -106,13 +106,28 @@ class AgentsController extends ControllerBase
     }
 
     /**
-     *
-     *
      * @return string
      */
     public function actionEdit()
     {
-        return $this->render('edit');
+        $id = Yii::$app->request->get('id');
+        $data = $this->_service->getOne($id)->toArray();
+        return $this->render('edit', ['data' => $data]);
+    }
+
+    /**
+     * @return string
+     */
+    public function actionDelete()
+    {
+        try {
+            $id = Yii::$app->request->post('id');
+            $this->_service->delete($id);
+            return $this->asJson(['code' => 0, 'msg' => '删除成功']);
+        } catch (\Exception $ex) {
+            \Yii::error($ex->getMessage());
+            return $this->asJson(['code' => 40013, 'msg' => $ex->getMessage()]);
+        }
     }
 
     /**
@@ -122,7 +137,6 @@ class AgentsController extends ControllerBase
     public function actionImport()
     {
         set_time_limit(0);
-
         $file = UploadedFile::getInstanceByName('file');
         $result = $this->_service->import($file);
 

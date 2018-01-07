@@ -11,6 +11,7 @@ namespace backend\services;
 
 use backend\models\AgentsModel;
 use backend\repositories\AgentsRepository;
+use common\entities\Agents;
 use common\utils\PagingHelper;
 
 class AgentsService extends ServiceBase
@@ -40,6 +41,20 @@ class AgentsService extends ServiceBase
         return $this->_respository->getList($skip, $limit, $keywords);
     }
 
+    public function getOne($id)
+    {
+        return $this->_respository->getOne(new Agents, $id);
+    }
+
+    public function delete($id)
+    {
+        $model = new AgentsModel($id);
+        if ($model->delete()) {
+            return $model->id;
+        }
+        return null;
+    }
+
     /**
      * 保存代理人
      * @param $data
@@ -67,7 +82,7 @@ class AgentsService extends ServiceBase
     public function import($file)
     {
         if (empty($file)) {
-            return ["code" => 0, "msg" => '导入失败,请重新选择文件并导入'];
+            return ["code" => 0, "msg" => '导入失败', "detail" => '请重新选择文件并导入'];
         }
         $fileName = $file->tempName;
         $ext = pathinfo($file->name, PATHINFO_EXTENSION);

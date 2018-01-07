@@ -95,6 +95,11 @@ class AgentsModel extends ModelBase
         ];
     }
 
+    public function delete()
+    {
+        return $this->_one->delete();
+    }
+
     public function save()
     {
         if (!$this->validate()) {
@@ -103,6 +108,7 @@ class AgentsModel extends ModelBase
         $this->_one->setAttributes($this->attributes, false);
         if ($this->_one->save()) {
             $this->setAttributes($this->_one->attributes, false);
+            self::$_entity = null;
             return true;
         }
         return false;
