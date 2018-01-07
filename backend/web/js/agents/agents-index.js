@@ -2,7 +2,7 @@ define(function (require, exports, module) {
 	require('/js/common/grid.js');
 
 	$('#agent_grid').grid({
-        url: '/agent/agent-list',
+        url: '/agents/agent-list',
         idField: 'id',
         templateid: 'agent_grid_template',
         pagesize: 20,
@@ -17,6 +17,6 @@ define(function (require, exports, module) {
     });
 
 	$('#editAgent').click(function(){
-		location.href = "/agent/edit/"
+		location.href = "/agents/edit/"
 	});
 })

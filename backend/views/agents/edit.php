@@ -13,8 +13,8 @@ $this->title = '代理人';
 <h4 class="padding manage-title border-bottom mb30">编辑代理人</h4>
 
 <div class="breadcrumbs padding mb30">
-    <a href="/agent/index" class="icon-merge icon-goback" title="返回上一层">返回上一层</a>
-    <a href="/agent/index" class="parent">代理人</a> / 
+    <a href="/agents/index" class="icon-merge icon-goback" title="返回上一层">返回上一层</a>
+    <a href="/agents/index" class="parent">代理人</a> /
     <span>编辑代理人</span>
 </div>
 
