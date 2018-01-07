@@ -5,6 +5,7 @@ use backend\services\AgentsService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\UploadedFile;
 
 /**
  * 基础数据 - 代理人
@@ -37,7 +38,7 @@ class AgentsController extends ControllerBase
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'save'],
+                        'actions' => ['index', 'save', 'ajax-get-list'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -75,7 +76,9 @@ class AgentsController extends ControllerBase
 
     /**
      * 获取列表
-     * @return json
+     * @param int $page
+     * @param int $pageSize
+     * @return \yii\web\Response
      */
     public function actionAjaxGetList($page = 1, $pageSize = 10)
     {
@@ -109,5 +112,19 @@ class AgentsController extends ControllerBase
     public function actionEdit()
     {
         return $this->render('edit');
+    }
+
+    /**
+     * 导入excel操作
+     * @return string
+     */
+    public function actionImport()
+    {
+        set_time_limit(0);
+
+        $file = UploadedFile::getInstanceByName('file');
+        $result = $this->_service->import($file);
+
+        return json_encode($result);
     }
 }

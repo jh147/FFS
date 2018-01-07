@@ -34,4 +34,19 @@ class AgentsRepository extends RepositoryBase
             ->count();
         return ['items' => $items, 'total' => $total];
     }
+
+    /**
+     * 判断字段值是否唯一
+     * @param $field
+     * @param $val
+     * @param $id
+     * @return bool
+     */
+    public function isExists($field, $val, $id = null)
+    {
+        return Agents::find()
+            ->where([$field => $val])
+            ->andFilterWhere(['!=', 'id', $id])
+            ->exists();
+    }
 }
