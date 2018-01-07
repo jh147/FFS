@@ -50,18 +50,15 @@ $this->title = '代理人';
     
     <script type="text/template" id="agent_grid_template">
         <td class="align-c"><%- i %></td>
-        <td>
-            <%- type %>
-        </td>
+        <td><%- start_station %></td>
+        <td><%- simple_code %></td>
+        <td><%- financial_code %></td>
         <td><%- name %></td>
-        <td><%- proj_name %></td>
-        <td><%- file_name %></td>
-        <td><%- upload_time %></td>
-        <td><%- file_size %></td>
+        <td><%- manager %></td>
+        <td><%- manager_phone %></td>
         <td>
-            <p><a class="edit" href="javascript:;" data-id="<%- id%>">修改</a></p>
-
-            <p><a class="btn-del" href="javascript:;" data-id="<%- id%>">删除</a></p>
+            <a class="edit" href="javascript:;" data-id="<%- id%>">修改</a>
+            <a class="btn-del" href="javascript:;" data-id="<%- id%>">删除</a>
         </td>
     </script>
     <script type="text/javascript">
