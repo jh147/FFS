@@ -74,7 +74,7 @@ AppAsset::register($this);
                         <span class="glyphicon glyphicon-book align-m" aria-hidden="true"></span><span class="align-m">基础数据</span>
                     </dt>
                     <dd class="<?php if($this->title == '代理人'){ echo 'on';} ?>">
-                        <a href="/agent/index">代理人</a>
+                        <a href="/agents/index">代理人</a>
                     </dd>
                     <dd class="<?php if($this->title == '航班'){ echo 'on';} ?>">
                         <a href="/flight/index">航班</a>
