@@ -101,7 +101,7 @@ class AgentsController extends ControllerBase
             return $this->asJson(['code' => 0, 'msg' => ($data['id'] ? '修改成功' : '新增成功'), 'data' => ['id' => $id]]);
         } catch (\Exception $ex) {
             \Yii::error($ex->getMessage());
-            return $this->asJson(['code' => $ex->getCode(), 'msg' => $ex->getMessage()]);
+            return $this->asJson(['code' => 40013, 'msg' => $ex->getMessage()]);
         }
     }
 
