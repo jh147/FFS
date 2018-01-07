@@ -27,7 +27,7 @@ define(function (require, exports, module) {
                 'manager': '经理',
                 'manager_phone': '电话'
             },
-            data = {id: ''},
+            data = {id: $('#agent_id').val()},
             hasErr = false;
 
         $.each(keys, function(i, key){
