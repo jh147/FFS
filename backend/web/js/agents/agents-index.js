@@ -1,8 +1,8 @@
 define(function (require, exports, module) { 
-	require('/js/common/grid.js');
+    require('/js/common/grid.js');
 
-	$('#agent_grid').grid({
-        url: '/agents/agent-list',
+    var agent_grid = $('#agent_grid').grid({
+        url: '/agents/ajax-get-list',
         idField: 'id',
         templateid: 'agent_grid_template',
         pagesize: 20,
@@ -10,13 +10,17 @@ define(function (require, exports, module) {
         setEmptyText: function () {
             return '没有数据';
         },
-        method: 'post',
+        method: 'get',
         queryParams: function () {
             return 'start_station='+$.trim($('#start_station').val());
         }
     });
 
-	$('#editAgent').click(function(){
-		location.href = "/agents/edit/"
-	});
+    $('#search').click(function(){
+        agent_grid.refresh();
+    });
+
+    $('#agent_grid').on('click', '.edit', function(){
+        location.href = "/agents/edit?id="+$(this).data('id');
+    });
 })
