@@ -83,7 +83,7 @@ class AgentsController extends ControllerBase
     {
         $page = Yii::$app->request->get('page', 1);
         $pageSize = Yii::$app->request->get('pageSize', 10);
-        $keywords = Yii::$app->request->get('start_station');
+        $keywords = Yii::$app->request->get('keywords');
         $result = $this->_service->getList($page, $pageSize, $keywords);
 
         return $this->asJson($result);
