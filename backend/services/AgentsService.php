@@ -74,7 +74,7 @@ class AgentsService extends ServiceBase
     }
 
     /**
-     * 导入
+     * 导入代理人
      * @param $file
      * @return array
      * @throws \PHPExcel_Reader_Exception
@@ -82,7 +82,7 @@ class AgentsService extends ServiceBase
     public function import($file)
     {
         if (empty($file)) {
-            return ["code" => 0, "msg" => '导入失败', "detail" => '请重新选择文件并导入'];
+            return ["code" => 40014, "msg" => '导入代理人失败', "detail" => '请重新选择文件并导入'];
         }
         $fileName = $file->tempName;
         $ext = pathinfo($file->name, PATHINFO_EXTENSION);
@@ -97,7 +97,7 @@ class AgentsService extends ServiceBase
         try {
             $excelData = $objPHPExcel->getActiveSheet()->toArray('', false, true, true);
             $validResult = $this->validRowData($excelData);
-            if ($validResult['status'] == 0) {
+            if ($validResult['code'] != 0) {
                 return $validResult;
             }
             unset($excelData[1]); //删除第一行(Title行)
@@ -116,13 +116,13 @@ class AgentsService extends ServiceBase
             $this->_respository->batchInsert('agents', $cols, $values);
         } catch (\Exception $ex) {
             \Yii::error($ex);
-            return ["status" => "0", "message" => '导入失败', "detail" => ['excel中数据格式不符合要求，' . $ex->getMessage()]];
+            return ["code" => 40014, "msg" => '代理人导入失败', "detail" => ['excel中数据格式不符合要求，' . $ex->getMessage()]];
         } finally {
             unset($objPHPExcel);
             unset($objReader);
         }
 
-        return ['status' => '1', 'message' => '导入结果', 'detail' => $this->getImportResultDetail()];
+        return ['code' => 0, 'msg' => '代理人导入成功', 'detail' => $this->getImportResultDetail()];
     }
 
     /**
@@ -153,9 +153,9 @@ class AgentsService extends ServiceBase
             }
         }
         if (!empty($failRows)) {
-            return ["status" => "0", "message" => '校验失败', "detail" => $this->getFailDetail($failRows)];
+            return ["code" => 40014, "msg" => '代理人校验失败', "detail" => $this->getFailDetail($failRows)];
         }
-        return ["status" => "1", "message" => '校验成功，可以导入'];
+        return ["code" => 0, "msg" => '代理人校验成功，可以导入'];
     }
 
     /**
