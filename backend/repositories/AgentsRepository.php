@@ -51,4 +51,5 @@ class AgentsRepository extends RepositoryBase
             ->andFilterWhere(['!=', 'id', $id])
             ->exists();
     }
+
 }

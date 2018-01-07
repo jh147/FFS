@@ -104,14 +104,16 @@ class AgentsService extends ServiceBase
             //校验成功，开始导入数据
             \Yii::info('002.数据导入：校验成功，开始导入数据。' . memory_get_usage());
             $this->_importResult['success']['导入成功'] = $this->_importResult['fail']['导入失败'] = 0;
+            $cols = $values = [];
             foreach ($excelData as $row) {
                 $fieldData = $this->getFieldData($row);
-                if ($this->save($fieldData)) {
-                    $this->_importResult['success']['导入成功']++;
-                } else {
-                    $this->_importResult['fail']['导入失败']++;
+                if (empty($cols)) {
+                    $cols = array_keys($fieldData);
                 }
+                $values[] = array_values($fieldData);
+                $this->_importResult['success']['导入成功']++;
             }
+            $this->_respository->batchInsert('agents', $cols, $values);
         } catch (\Exception $ex) {
             \Yii::error($ex);
             return ["status" => "0", "message" => '导入失败', "detail" => ['excel中数据格式不符合要求，' . $ex->getMessage()]];
@@ -234,7 +236,9 @@ class AgentsService extends ServiceBase
 
         $fieldData = [];
         foreach ($dataRow as $key => $value) {
-            $fieldData[$columnRules[$key]['field_name']] = $value;
+            if ($columnRules[$key]['field_name']) {
+                $fieldData[$columnRules[$key]['field_name']] = $value;
+            }
         }
         return $fieldData;
     }

@@ -9,6 +9,8 @@
 namespace backend\repositories;
 
 
+use common\utils\StringHelper;
+
 abstract class RepositoryBase
 {
     /**
@@ -30,5 +32,28 @@ abstract class RepositoryBase
         return $entity->find()
             ->where(['id' => $id])
             ->one();
+    }
+
+    /**
+     * 批量插入
+     * @param $table
+     * @param $cols
+     * @param $rows
+     * @return $this|null
+     */
+    public function batchInsert($table, $cols, $rows)
+    {
+        if (empty($table) || empty($cols) || empty($rows)) {
+            return null;
+        }
+        if (!in_array('id', $cols)) {
+            array_push($cols, 'id');
+            $rows = array_map(function ($val) {
+                $id = StringHelper::uuid();
+                array_push($val, $id);
+                return $val;
+            }, $rows);
+        }
+        return $this->getDb()->createCommand()->batchInsert($table, $cols, $rows)->execute();
     }
 }
