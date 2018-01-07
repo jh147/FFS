@@ -18,12 +18,14 @@ class AgentsRepository extends RepositoryBase
      * 获取列表
      * @param $skip
      * @param $limit
+     * @param $keywords
      * @return array
      */
-    public function getList($skip, $limit)
+    public function getList($skip, $limit, $keywords)
     {
 
         $items = Agents::find()
+            ->filterWhere(['like', 'start_station', $keywords])
             ->orderBy(['created_on' => SORT_DESC])
             ->offset($skip)
             ->limit($limit)

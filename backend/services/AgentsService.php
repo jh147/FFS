@@ -23,14 +23,21 @@ class AgentsService extends ServiceBase
         $this->_respository = $agentsRepository;
     }
 
-    public function getList($page, $pageSize, $isLazyLoad = false)
+    /**
+     * @param $page
+     * @param $pageSize
+     * @param $keywords
+     * @param bool $isLazyLoad
+     * @return array
+     */
+    public function getList($page, $pageSize, $keywords, $isLazyLoad = false)
     {
         $page = max(1, (int)$page);
         $pageSize = max(0, (int)$pageSize);
         $skip = PagingHelper::getSkip($page, $pageSize);
         $limit = $isLazyLoad ? ($pageSize + 1) : $pageSize; //如果为懒加载，则比pageSize多查询一条记录，以便知道是否有下一页，多的这条记录将在控制器中删掉。
 
-        return $this->_respository->getList($skip, $limit);
+        return $this->_respository->getList($skip, $limit, $keywords);
     }
 
     /**
@@ -60,7 +67,7 @@ class AgentsService extends ServiceBase
     public function import($file)
     {
         if (empty($file)) {
-            return ["status" => "0", "message" => '导入失败', "detail" => ['请重新选择文件并导入']];
+            return ["code" => 0, "msg" => '导入失败,请重新选择文件并导入'];
         }
         $fileName = $file->tempName;
         $ext = pathinfo($file->name, PATHINFO_EXTENSION);

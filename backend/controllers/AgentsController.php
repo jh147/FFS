@@ -38,7 +38,7 @@ class AgentsController extends ControllerBase
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'save', 'edit', 'ajax-get-list'],
+                        'actions' => ['index', 'save', 'edit', 'ajax-get-list', 'import'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -76,13 +76,14 @@ class AgentsController extends ControllerBase
 
     /**
      * 获取列表
-     * @param int $page
-     * @param int $pageSize
      * @return \yii\web\Response
      */
-    public function actionAjaxGetList($page = 1, $pageSize = 10)
+    public function actionAjaxGetList()
     {
-        $result = $this->_service->getList($page, $pageSize);
+        $page = Yii::$app->request->get('page', 1);
+        $pageSize = Yii::$app->request->get('pageSize', 10);
+        $keywords = Yii::$app->request->get('keywords');
+        $result = $this->_service->getList($page, $pageSize, $keywords);
 
         return $this->asJson($result);
     }
