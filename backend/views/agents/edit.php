@@ -22,7 +22,7 @@ $this->title = '代理人';
     <div class="form-group">
         <label class="form-label col-md-1">始发站</label>
         <div class="col-md-3">
-            <input type="text" class="form-control fm_required" id="start_station">
+            <input type="text" class="form-control fm_required" id="start_station" value="<?php echo $this->$data['name'] ?>">
         </div>
         <label class="form-label col-md-2 align-c">简码</label>
         <div class="col-md-3 ">

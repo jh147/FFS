@@ -74,6 +74,7 @@ class AgentsController extends ControllerBase
         return $this->render('index');
     }
 
+    
     /**
      * 获取列表
      * @return \yii\web\Response

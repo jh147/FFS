@@ -1,4 +1,6 @@
 define(function (require, exports, module) { 
+
+
     var saving = false;
 
 	$('#save').click(function(){
@@ -53,6 +55,8 @@ define(function (require, exports, module) {
             success: function(res){
                 if(res.code == 0){
                     location.href = "/agents/index/"
+                }else{
+                    alert(res.msg || '保存失败');
                 }
             },
             complete: function(){
@@ -61,4 +65,22 @@ define(function (require, exports, module) {
         });
 		
 	});
+
+    function getQuery(key){
+        var querys = location.search.replace('?', '').splite('&'),
+            keyValue;
+
+        if(!key){
+            return null;
+        }
+
+        for(var i = 0; i < querys.length; i++){
+            keyValue = querys[i].splite('=');
+            if(key == keyValue[0]){
+                return keyValue[1];
+            }
+        }
+
+        return null;
+    }
 })

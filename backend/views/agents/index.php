@@ -21,8 +21,8 @@ $this->title = '代理人';
         <div class="grid-toolbar">
             <div class="grid-btns clearfix">
                 <div class="pull-right">
-                    <button type="button" class="btn btn-primary grid-btn-sep">导入</button>
-                    <a type="button" class="btn btn-primary" id="editAgent" href="/agents/edit">新增</a>
+                    <button type="button" class="btn btn-primary grid-btn-sep" id="import_agents_btn">导入</button>
+                    <a type="button" class="btn btn-primary" id="editAgent" href="/agents/edit?id">新增</a>
                 </div>
             </div>
 
