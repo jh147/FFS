@@ -65,6 +65,6 @@ $this->title = '代理人';
         </td>
     </script>
     <script type="text/javascript">
-        seajs.use('/js/agent/agent-index.js');
+        seajs.use('/js/agents/agents-index.js');
     </script>
 </div>

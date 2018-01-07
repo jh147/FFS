@@ -37,7 +37,7 @@ class AgentsController extends ControllerBase
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'edit', 'save'],
+                        'actions' => ['index', 'edit', 'save', 'ajax-get-list'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
