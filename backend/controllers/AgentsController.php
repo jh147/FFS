@@ -83,7 +83,7 @@ class AgentsController extends ControllerBase
     {
         $page = Yii::$app->request->get('page', 1);
         $pageSize = Yii::$app->request->get('pageSize', 10);
-        $keywords = Yii::$app->request->get('keywords');
+        $keywords = Yii::$app->request->get('start_station');
         $result = $this->_service->getList($page, $pageSize, $keywords);
 
         return $this->asJson($result);
@@ -112,7 +112,11 @@ class AgentsController extends ControllerBase
     public function actionEdit()
     {
         $id = Yii::$app->request->get('id');
-        $data = $this->_service->getOne($id)->toArray();
+        $agent = $this->_service->getOne($id);
+        $data = [];
+        if ($agent) {
+            $data = $agent->toArray();
+        }
         return $this->render('edit', ['data' => $data]);
     }
 
