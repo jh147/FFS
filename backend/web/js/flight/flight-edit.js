@@ -13,7 +13,7 @@ define(function (require, exports, module) {
             })
         });
     });
-    
+
 	$('#save').click(function(){
         var keys = [
                 'flight_num',
@@ -26,6 +26,7 @@ define(function (require, exports, module) {
                 'stopover_station_1',
                 'take_off_2',
                 'land_2',
+                'destination_station',
                 'start_date',
                 'end_date'
             ],
@@ -41,7 +42,7 @@ define(function (require, exports, module) {
                 'start_date': '开始日期',
                 'end_date': '结束日期'
             },
-            data = {id: $('#agent_id').val()},
+            data = {id: $('#flight_id').val()},
             hasErr = false;
 
         $.each(keys, function(i, key){

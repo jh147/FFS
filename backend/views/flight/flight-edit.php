@@ -19,66 +19,67 @@ $this->title = '航班';
 </div>
 
 <div class="form form-base form-horizontal padding">
+    <input type="hidden" id="flight_id" value="<?= $data['id']?>">
     <div class="form-group">
         <label class="form-label col-md-1">航班号</label>
         <div class="col-md-3">
-            <input type="text" class="form-control fm_required" id="flight_num">
+            <input type="text" class="form-control fm_required" id="flight_num" value="<?= $data['flight_num'] ?>">
         </div>
         <label class="form-label col-md-2 align-c">机型</label>
         <div class="col-md-3 ">
-            <input type="text" class="form-control fm_required" id="flight_model">
+            <input type="text" class="form-control fm_required" id="flight_model" value="<?= $data['flight_model'] ?>">
         </div>
     </div>
 
     <div class="form-group">
         <label class="form-label col-md-1">航线</label>
         <div class="col-md-3">
-            <input type="text" class="form-control fm_required" id="air_line">
+            <input type="text" class="form-control fm_required" id="air_line" value="<?= $data['air_line'] ?>">
         </div>
         <label class="form-label col-md-2 align-c">班期</label>
         <div class="col-md-3">
-            <input type="text" class="form-control fm_required" id="schedule">
+            <input type="text" class="form-control fm_required" id="schedule" value="<?= $data['schedule'] ?>">
         </div>
     </div>
 
     <div class="form-group">
         <label class="form-label col-md-1">始发站</label>
         <div class="col-md-3">
-            <input type="text" class="form-control fm_required" id="start_station">
+            <input type="text" class="form-control fm_required" id="start_station" value="<?= $data['start_station'] ?>">
         </div>
     </div>
     
     <div class="form-group">
         <label class="form-label col-md-1">起飞1</label>
         <div class="col-md-3">
-            <input type="text" class="form-control" id="take_off_1">
+            <input type="text" class="form-control" id="take_off_1" value="<?= $data['take_off_1'] ?>">
         </div>
         <label class="form-label col-md-2 align-c">降落1</label>
         <div class="col-md-3">
-            <input type="text" class="form-control" id="land_1">
+            <input type="text" class="form-control" id="land_1" value="<?= $data['land_1'] ?>">
         </div>
     </div>
     <div class="form-group">
         <label class="form-label col-md-1">经停站</label>
         <div class="col-md-3">
-            <input type="text" class="form-control fm_required" id="stopover_station_1">
+            <input type="text" class="form-control fm_required" id="stopover_station_1" value="<?= $data['stopover_station_1'] ?>">
         </div>
     </div>
     <div class="form-group">
         <label class="form-label col-md-1">起飞2</label>
         <div class="col-md-3">
-            <input type="text" class="form-control" id="take_off_2">
+            <input type="text" class="form-control" id="take_off_2" value="<?= $data['take_off_2'] ?>">
         </div>
         <label class="form-label col-md-2 align-c">降落2</label>
         <div class="col-md-3 ">
-            <input type="text" class="form-control" id="land_2">
+            <input type="text" class="form-control" id="land_2" value="<?= $data['land_2'] ?>">
         </div>
     </div>
 
     <div class="form-group">
         <label class="form-label col-md-1">目的站</label>
         <div class="col-md-3">
-            <input type="text" class="form-control" id="destination_station">
+            <input type="text" class="form-control" id="destination_station" value="<?= $data['destination_station'] ?>">
         </div>
     </div>
     
@@ -86,11 +87,11 @@ $this->title = '航班';
     <div class="form-group">
         <label class="form-label col-md-1">开始日期</label>
         <div class="col-md-3">
-            <input type="text" class="form-control Wdate" readonly="readonly" id="start_date">
+            <input type="text" class="form-control Wdate" readonly="readonly" id="start_date" value="<?= $data['start_date'] ?>">
         </div>
         <label class="form-label col-md-2 align-c">结束日期</label>
         <div class="col-md-3 ">
-            <input type="text" class="form-control Wdate" readonly="readonly" id="end_date">
+            <input type="text" class="form-control Wdate" readonly="readonly" id="end_date" value="<?= $data['end_date'] ?>">
         </div>
     </div>
 

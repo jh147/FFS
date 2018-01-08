@@ -34,7 +34,7 @@ $this->title = '航班';
             <div class="grid-btns clearfix">
                 <div class="pull-right">
                     <button type="button" class="btn btn-primary grid-btn-sep" id="import_flight_btn">导入</button>
-                    <a type="button" class="btn btn-primary" href="/flight/flight-edit/">新增</a>
+                    <a type="button" class="btn btn-primary" href="/flight/edit/">新增</a>
                 </div>
             </div>
         </div>
