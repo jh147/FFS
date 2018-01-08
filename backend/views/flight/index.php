@@ -16,15 +16,15 @@ $this->title = '航班';
         </li>
         <li class="search-inline">
             <span>开始日期</span>
-            <input type="text" readonly="readonly" class="form-control Wdate" id="stime" style="width:200px;">
+            <input type="text" readonly="readonly" class="form-control Wdate" id="stime" style="width:130px;">
         </li>
         <li class="search-inline">
             <span>结束日期</span>
-            <input type="text" readonly="readonly" class="form-control Wdate" id="etime" style="width:200px;">
+            <input type="text" readonly="readonly" class="form-control Wdate" id="etime" style="width:130px;">
         </li>
         <li>
             <span>&nbsp;</span>
-            <button type="button" class="btn btn-primary">搜索</button>
+            <button type="button" class="btn btn-primary" id="search">搜索</button>
         </li>
     </ul>
 
@@ -39,7 +39,7 @@ $this->title = '航班';
             </div>
         </div>
         
-        <div class="grid-content" id="grid">
+        <div class="grid-content" id="flight_grid">
             <table class="table form">
                 <thead>
                   <tr>
@@ -51,6 +51,7 @@ $this->title = '航班';
                     <th>始发站</th>
                     <th>开始日期</th>
                     <th>结束日期</th>
+                    <th>操作</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -59,22 +60,18 @@ $this->title = '航班';
         </div>
     </div>
     
-    <script type="text/template" id="gridrow_template">
-        <td class="align-r">
-            <label class="form-checkbox" for="checkbox_<%- i %>">
-                <i class="icon-checkbox"></i>
-                <span class="align-m"></span>
-                <input type="checkbox" class="form-checkbox-input" id="checkbox_<%- i %>">
-            </label>
-        </td>
+    <script type="text/template" id="flight_grid_template">
         <td class="align-c"><%- i %></td>
-        <td><%- weixin %></td>
-        <td allowedit="name_template"><%- name %></td>
-        <td class="color-gray"><%- card %></td>
-        <td class="color-gray"><%- mobile %></td>
+        <td><%- flight_num %></td>
+        <td><%- flight_model %></td>
+        <td><%- air_line %></td>
+        <td><%- schedule %></td>
+        <td><%- start_station %></td>
+        <td><%- start_date %></td>
+        <td><%- end_date %></td>
         <td>
-            <p><a href="/index.php?r=index/form">编辑</a></p>
-            <p><a href="javascript:;" class="del">删除</a></p>
+            <a class="edit" href="javascript:;" data-id="<%- id%>">修改</a>
+            <a class="btn-del" href="javascript:;" data-id="<%- id%>">删除</a>
         </td>
     </script>
     
@@ -82,5 +79,8 @@ $this->title = '航班';
         <div class="form form-base">
             <input type="text" class="form-control" value="<%- name%>" id="newname">
         </div>
+    </script>
+    <script type="text/javascript">
+        seajs.use('/js/flight/flight-index.js');
     </script>
 </div>
