@@ -94,14 +94,11 @@ define(function (require, exports, module) {
                 FileUploaded: function(up, file, info) {
                     var data = JSON.parse(info.response) || {};
                     if (data.code == 0) {
-                        showMessage('上传失败！');
+                        showMessage('上传成功！');
+                        agent_grid.refresh();
                     } else {
                         showMessage('上传失败！\r\n' + data.detail.join('\r\n'), false, 4000);
                     }
-                    $('body').on('click', '.btn-primary', function() {
-                        box.close();
-                        box.remove();
-                    });
                 },
                 Error: function(up, err) {
                     // $.topLoading.hide();

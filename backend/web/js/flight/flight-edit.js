@@ -1,8 +1,19 @@
 define(function (require, exports, module) { 
-
+    require('/js/lib/laydate/laydate.dev.js');
 
     var saving = false;
 
+    $.each(['start_date', 'end_date'], function(i, id){
+        $('#'+id).click(function(){
+            laydate({
+                elem: '#'+id,
+                format: 'YYYY-MM-DD',
+                istime: true,
+                isclear: true
+            })
+        });
+    });
+    
 	$('#save').click(function(){
         var keys = [
                 'flight_num',

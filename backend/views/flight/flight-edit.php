@@ -98,4 +98,7 @@ $this->title = '航班';
         <button type="button" class="btn btn-primary" id="save">保存</button>
     </div>
 </div>
+<script type="text/javascript">
+    seajs.use('/js/flight/flight-edit.js');
+</script>
     

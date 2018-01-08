@@ -67,8 +67,6 @@ define(function (require, exports, module) {
     });
     
 
-    
-
     var _uploadExcelInstance = null;
 
     function showMessage(message, isNormal, delay) {
@@ -112,18 +110,12 @@ define(function (require, exports, module) {
                 // 先请求import-room接口，再请求进度的接口
                 FileUploaded: function(up, file, info) {
                     var data = JSON.parse(info.response) || {};
-                    if (data.status) {
-                        scheduleFileName = file.name;
-                        $("#masterName").text(file.name);
-                        scheduleTime = new Date().getTime();
-                        getDep(callback);
+                    if (data.code == 0) {
+                        showMessage('上传成功！');
+                        flight_grid.refresh();
                     } else {
-                        showMessage('上传失败！', false, 4000);
+                        showMessage('上传失败！\r\n' + data.detail.join('\r\n'), false, 4000);
                     }
-                    $('body').on('click', '.btn-primary', function() {
-                        box.close();
-                        box.remove();
-                    });
                 },
                 Error: function(up, err) {
                     // $.topLoading.hide();
@@ -135,7 +127,7 @@ define(function (require, exports, module) {
         _uploadExcelInstance.init();
     }
 
-    importExcel('import_agents_btn', '/flight/import', null, function() {
+    importExcel('import_flight_btn', '/flight/import', null, function() {
         if (agent_grid) {
             agent_grid.refresh();
         }
