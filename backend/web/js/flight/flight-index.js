@@ -15,7 +15,10 @@ define(function (require, exports, module) {
         },
         method: 'get',
         queryParams: function () {
-            return 'keywords='+$.trim($('#start_station').val());
+            return 'flight_num='+$.trim($('#flight_num').val())+'&'
+                    +'start_station='+$.trim($('#start_station').val())+'&'
+                    +'start_date='+$.trim($('#start_date').val())+'&'
+                    +'end_date='+$.trim($('#end_date').val());
         }
     });
 
@@ -52,7 +55,7 @@ define(function (require, exports, module) {
         
     });
 
-    $.each(['stime', 'etime'], function(i, id){
+    $.each(['start_date', 'end_date'], function(i, id){
         $('#'+id).click(function(){
             laydate({
                 elem: '#'+id,

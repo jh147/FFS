@@ -8,19 +8,19 @@ $this->title = '航班';
     <ul class="search-con clearfix">
         <li>
             <span>航班号</span>
-            <input type="text" class="form-control" placeholder="" style="width:100px;">
+            <input type="text" class="form-control" placeholder="" style="width:100px;" id="flight_num">
         </li>
         <li>
             <span>始发站</span>
-            <input type="text" class="form-control" placeholder="" style="width:100px;">
+            <input type="text" class="form-control" placeholder="" style="width:100px;" id="start_station">
         </li>
         <li class="search-inline">
             <span>开始日期</span>
-            <input type="text" readonly="readonly" class="form-control Wdate" id="stime" style="width:130px;">
+            <input type="text" readonly="readonly" class="form-control Wdate" id="start_date" style="width:130px;">
         </li>
         <li class="search-inline">
             <span>结束日期</span>
-            <input type="text" readonly="readonly" class="form-control Wdate" id="etime" style="width:130px;">
+            <input type="text" readonly="readonly" class="form-control Wdate" id="end_date" style="width:130px;">
         </li>
         <li>
             <span>&nbsp;</span>

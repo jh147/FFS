@@ -91,16 +91,12 @@ define(function (require, exports, module) {
                     // $.topLoading.show('正在导入，请稍后');
                     (!beforeUpload ? true : beforeUpload()) && _uploadExcelInstance.start();
                 },
-                // 先请求import-room接口，再请求进度的接口
                 FileUploaded: function(up, file, info) {
                     var data = JSON.parse(info.response) || {};
-                    if (data.status) {
-                        scheduleFileName = file.name;
-                        $("#masterName").text(file.name);
-                        scheduleTime = new Date().getTime();
-                        getDep(callback);
+                    if (data.code == 0) {
+                        showMessage('上传失败！');
                     } else {
-                        showMessage('上传失败！', false, 4000);
+                        showMessage('上传失败！\r\n' + data.detail.join('\r\n'), false, 4000);
                     }
                     $('body').on('click', '.btn-primary', function() {
                         box.close();

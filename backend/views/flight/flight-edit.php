@@ -22,59 +22,63 @@ $this->title = '航班';
     <div class="form-group">
         <label class="form-label col-md-1">航班号</label>
         <div class="col-md-3">
-            <input type="text" class="form-control fm_required">
+            <input type="text" class="form-control fm_required" id="flight_num">
         </div>
         <label class="form-label col-md-2 align-c">机型</label>
         <div class="col-md-3 ">
-            <input type="text" class="form-control fm_required">
+            <input type="text" class="form-control fm_required" id="flight_model">
         </div>
     </div>
 
     <div class="form-group">
         <label class="form-label col-md-1">航线</label>
         <div class="col-md-3">
-            <input type="text" class="form-control fm_required">
+            <input type="text" class="form-control fm_required" id="air_line">
         </div>
         <label class="form-label col-md-2 align-c">班期</label>
         <div class="col-md-3">
-            <input type="text" class="form-control fm_required">
+            <input type="text" class="form-control fm_required" id="schedule">
         </div>
     </div>
 
     <div class="form-group">
         <label class="form-label col-md-1">始发站</label>
         <div class="col-md-3">
-            <input type="text" class="form-control fm_required">
+            <input type="text" class="form-control fm_required" id="start_station">
         </div>
-        
     </div>
     
     <div class="form-group">
         <label class="form-label col-md-1">起飞1</label>
         <div class="col-md-3">
-            <input type="text" class="form-control ">
+            <input type="text" class="form-control" id="take_off_1">
         </div>
         <label class="form-label col-md-2 align-c">降落1</label>
         <div class="col-md-3">
-            <input type="text" class="form-control ">
+            <input type="text" class="form-control" id="land_1">
         </div>
     </div>
-    
+    <div class="form-group">
+        <label class="form-label col-md-1">经停站</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control fm_required" id="stopover_station_1">
+        </div>
+    </div>
     <div class="form-group">
         <label class="form-label col-md-1">起飞2</label>
         <div class="col-md-3">
-            <input type="text" class="form-control ">
+            <input type="text" class="form-control" id="take_off_2">
         </div>
         <label class="form-label col-md-2 align-c">降落2</label>
         <div class="col-md-3 ">
-            <input type="text" class="form-control ">
+            <input type="text" class="form-control" id="land_2">
         </div>
     </div>
 
     <div class="form-group">
         <label class="form-label col-md-1">目的站</label>
         <div class="col-md-3">
-            <input type="text" class="form-control ">
+            <input type="text" class="form-control" id="destination_station">
         </div>
     </div>
     
@@ -82,16 +86,16 @@ $this->title = '航班';
     <div class="form-group">
         <label class="form-label col-md-1">开始日期</label>
         <div class="col-md-3">
-            <input type="text" class="form-control Wdate" readonly="readonly">
+            <input type="text" class="form-control Wdate" readonly="readonly" id="start_date">
         </div>
         <label class="form-label col-md-2 align-c">结束日期</label>
         <div class="col-md-3 ">
-            <input type="text" class="form-control Wdate" readonly="readonly">
+            <input type="text" class="form-control Wdate" readonly="readonly" id="end_date">
         </div>
     </div>
 
     <div class="form-bottom">
-        <button type="button" class="btn btn-primary">保存</button>
+        <button type="button" class="btn btn-primary" id="save">保存</button>
     </div>
 </div>
     
