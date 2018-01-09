@@ -21,22 +21,16 @@ class GoodsController extends ControllerBase
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'edit'],
                         'allow' => true,
                         'roles' => ['@'],
-                    ],
-                    [
-                        'actions' => ['goods-edit'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
+                    ]
                 ],
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'index' => ['get'],
-                    'goods-edit' => ['get'],
+                   
                 ],
             ],
         ];
@@ -70,7 +64,7 @@ class GoodsController extends ControllerBase
      *
      * @return string
      */
-    public function actionGoodsEdit()
+    public function actionEdit()
     {
         return $this->render('goods-edit');
     }

@@ -9,19 +9,19 @@ $this->title = '货物种类';
     <ul class="search-con clearfix">
         <li>
             <span>航站</span>
-            <input type="text" class="form-control" placeholder="" style="width:200px;">
+            <input type="text" class="form-control" placeholder="" style="width:200px;" id="flight_station">
         </li>
         <li>
             <span>运价代码</span>
-            <input type="text" class="form-control" placeholder="" style="width:200px;">
+            <input type="text" class="form-control" placeholder="" style="width:200px;" id="freight_rates_code">
         </li>
         <li>
             <span>品名</span>
-            <input type="text" class="form-control" placeholder="" style="width:200px;">
+            <input type="text" class="form-control" placeholder="" style="width:200px;" id="product_name">
         </li>
         <li>
             <span>&nbsp;</span>
-            <button type="button" class="btn btn-primary">搜索</button>
+            <button type="button" class="btn btn-primary" id="search">搜索</button>
         </li>
     </ul>
 
@@ -29,14 +29,14 @@ $this->title = '货物种类';
         <div class="grid-toolbar">
             <div class="grid-btns clearfix">
                 <div class="pull-right">
-                    <button type="button" class="btn btn-primary grid-btn-sep">导入</button>
-                    <a type="button" class="btn btn-primary" id="editAgent" href="/goods/goods-edit">新增</a>
+                    <button type="button" class="btn btn-primary grid-btn-sep" id="import_goods_btn">导入</button>
+                    <a type="button" class="btn btn-primary" id="editAgent" href="/goods/edit">新增</a>
                 </div>
             </div>
 
         </div>
         
-        <div class="grid-content" id="grid">
+        <div class="grid-content" id="goods_grid">
             <table class="table form">
                 <thead>
                   <tr>
@@ -53,31 +53,18 @@ $this->title = '货物种类';
         </div>
     </div>
     
-    <script type="text/template" id="gridrow_template">
-        <td class="align-r">
-            <label class="form-checkbox" for="checkbox_<%- i %>">
-                <i class="icon-checkbox"></i>
-                <span class="align-m"></span>
-                <input type="checkbox" class="form-checkbox-input" id="checkbox_<%- i %>">
-            </label>
-        </td>
+    <script type="text/template" id="goods_grid_template">
         <td class="align-c"><%- i %></td>
-        <td><%- weixin %></td>
-        <td allowedit="name_template"><%- name %></td>
-        <td class="color-gray"><%- card %></td>
-        <td class="color-gray"><%- mobile %></td>
+        <td><%- flight_station %></td>
+        <td><%- freight_rates_code %></td>
+        <td><%- product_name %></td>
         <td>
-            <p><a href="/index.php?r=index/form">编辑</a></p>
-            <p><a href="javascript:;" class="del">删除</a></p>
+            <a class="edit" href="javascript:;" data-id="<%- id%>">修改</a>
+            <a class="btn-del" href="javascript:;" data-id="<%- id%>">删除</a>
         </td>
     </script>
     
-    <script type="text/template" id="name_template">
-        <div class="form form-base">
-            <input type="text" class="form-control" value="<%- name%>" id="newname">
-        </div>
-    </script>
     <script type="text/javascript">
-        seajs.use('/js/agent/agent-index.js');
+        seajs.use('/js/goods/goods-index.js');
     </script>
 </div>
