@@ -24,6 +24,11 @@ class OrderRepository extends RepositoryBase
     public function getList($skip, $limit, $conditions)
     {
         $sqlObj = ShippingOrder::find()->where('1=1');
+        if ($conditions['eq']) {
+            foreach ($conditions['eq'] as $k => $v) {
+                $sqlObj->andFilterWhere(['=', $k, $v]);
+            }
+        }
         if ($conditions['like']) {
             foreach ($conditions['like'] as $k => $v) {
                 $sqlObj->andFilterWhere(['like', $k, $v]);

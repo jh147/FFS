@@ -98,6 +98,7 @@ class PgOrderController extends ControllerBase
     {
         $page = Yii::$app->request->get('page', 1);
         $pageSize = Yii::$app->request->get('pageSize', 10);
+        $conditions['eq']['type'] = 'pg';
         $conditions['like']['simple_code'] = Yii::$app->request->get('simple_code');
         $conditions['like']['flight_num'] = Yii::$app->request->get('flight_num');
         $conditions['like']['destination_station'] = Yii::$app->request->get('destination_station');

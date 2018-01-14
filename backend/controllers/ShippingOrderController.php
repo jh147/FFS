@@ -98,6 +98,7 @@ class ShippingOrderController extends ControllerBase
     {
         $page = Yii::$app->request->get('page', 1);
         $pageSize = Yii::$app->request->get('pageSize', 10);
+        $conditions['eq']['type'] = 'common';
         $conditions['ge']['flight_date'] = Yii::$app->request->get('start_date');
         $conditions['le']['flight_date'] = Yii::$app->request->get('end_date');
         $result = $this->_service->getList($page, $pageSize, $conditions);
