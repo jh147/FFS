@@ -288,4 +288,21 @@ class OrderService extends ServiceBase
         }
         return $fieldData;
     }
+
+    /**
+     * @param $page
+     * @param $pageSize
+     * @param $conditions
+     * @param bool $isLazyLoad
+     * @return array
+     */
+    public function getDailBusiness($page, $pageSize, $conditions, $isLazyLoad = false)
+    {
+        $page = max(1, (int)$page);
+        $pageSize = max(0, (int)$pageSize);
+        $skip = PagingHelper::getSkip($page, $pageSize);
+        $limit = $isLazyLoad ? ($pageSize + 1) : $pageSize; //如果为懒加载，则比pageSize多查询一条记录，以便知道是否有下一页，多的这条记录将在控制器中删掉。
+
+        return $this->_respository->getDailBusiness($skip, $limit, $conditions);
+    }
 }

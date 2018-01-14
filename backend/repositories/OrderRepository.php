@@ -69,4 +69,48 @@ class OrderRepository extends RepositoryBase
             ->exists();
     }
 
+    /**
+     * 获取列表
+     * @param $skip
+     * @param $limit
+     * @param $conditions
+     * @return array
+     */
+    public function getDailBusiness($skip, $limit, $conditions)
+    {
+        $sqlObj = ShippingOrder::find()->where('1=1');
+        if ($conditions['eq']) {
+            foreach ($conditions['eq'] as $k => $v) {
+                $sqlObj->andFilterWhere(['=', $k, $v]);
+            }
+        }
+        if ($conditions['like']) {
+            foreach ($conditions['like'] as $k => $v) {
+                $sqlObj->andFilterWhere(['like', $k, $v]);
+            }
+        }
+        if ($conditions['ge']) {
+            foreach ($conditions['ge'] as $k => $v) {
+                $sqlObj->andFilterWhere(['>=', $k, $v]);
+            }
+        }
+        if ($conditions['le']) {
+            foreach ($conditions['le'] as $k => $v) {
+                $sqlObj->andFilterWhere(['<=', $k, $v]);
+            }
+        }
+        $items = $sqlObj->select('*')
+            ->orderBy(['created_on' => SORT_DESC])
+            ->offset($skip)
+            ->limit($limit)
+            ->groupBy('order_num')
+            ->createCommand()
+            ->queryAll();
+
+        $total = $sqlObj
+            ->groupBy('order_num')
+            ->count();
+        return ['items' => $items, 'total' => $total];
+    }
+
 }
