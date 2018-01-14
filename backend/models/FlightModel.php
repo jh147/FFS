@@ -20,7 +20,7 @@ class FlightModel extends ModelBase
     public $start_station;
     public $take_off_1;
     public $land_1;
-    public $stopover_station_1;
+    public $stopover_station;
     public $take_off_2;
     public $land_2;
     public $destination_station;
@@ -83,7 +83,7 @@ class FlightModel extends ModelBase
             ['air_line', 'required'],
             ['air_line', 'string', 'min' => 2, 'max' => 50],
 
-            [['schedule', 'start_station', 'take_off_1', 'land_1', 'stopover_station_1', 'take_off_2', 'land_2', 'destination_station', 'start_date', 'end_date'], 'string', 'min' => 2, 'max' => 200],
+            [['schedule', 'start_station', 'take_off_1', 'land_1', 'stopover_station', 'take_off_2', 'land_2', 'destination_station', 'start_date', 'end_date'], 'string', 'min' => 2, 'max' => 200],
 
             [['created_on', 'modified_on', 'created_by', 'modified_by'], 'string'],
 
