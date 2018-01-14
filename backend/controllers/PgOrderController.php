@@ -72,7 +72,7 @@ class PgOrderController extends ControllerBase
      */
     public function actionIndex()
     {
-        return $this->render('order-index');
+        return $this->render('pg-index');
     }
 
     /**
@@ -87,7 +87,7 @@ class PgOrderController extends ControllerBase
         if ($obj) {
             $data = $obj->toArray();
         }
-        return $this->render('order-edit', ['data' => $data]);
+        return $this->render('pg-edit', ['data' => $data]);
     }
 
     /**

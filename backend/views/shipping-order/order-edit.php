@@ -32,7 +32,7 @@ $this->title = '运单';
         <div class="col-md-5 form-lookup clearfix" id="agent">
             <div class="search-bar">
                 <input type="text" class="search-input" 
-                placeholder="请输入代理人简码" name="name" id="agent_input" value="<?= $data['agent_simple_code']?>">
+                placeholder="请输入代理人简码" name="name" id="agent_input" value="<?= $data['simple_code']?>">
                 <input type="hidden" name="id" id="agent_input_id" value="<?= $data['agent_id']?>">
                 <span class="x-icon x-icon-clear" id="x_clear" style="display: none;">×</span>
                 <div class="search-btn search-icon"></div>
