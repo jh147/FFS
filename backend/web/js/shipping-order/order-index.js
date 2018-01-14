@@ -4,7 +4,7 @@ define(function (require, exports, module) {
     $.getScript("/js/lib/plupload/i18n/zh_CN.js"); //中文提示包
     require('/js/lib/laydate/laydate.dev.js');
 
-    var flight_grid = $('#flight_grid').grid({
+    var shipping_order_grid = $('#shipping_order_grid').grid({
         url: '/shipping-order/ajax-get-list',
         idField: 'id',
         templateid: 'shipping_order_grid_template',
@@ -15,16 +15,14 @@ define(function (require, exports, module) {
         },
         method: 'get',
         queryParams: function () {
-            return 'flight_num='+$.trim($('#flight_num').val())+'&'
-                    +'start_station='+$.trim($('#start_station').val())+'&'
-                    +'start_date='+$.trim($('#start_date').val())+'&'
+            return 'start_date='+$.trim($('#start_date').val())+'&'
                     +'end_date='+$.trim($('#end_date').val());
         }
     });
 
     // 搜索
     $('#search').click(function(){
-        flight_grid.refresh();
+        shipping_order_grid.refresh();
     });
 
     // 编辑
@@ -45,7 +43,7 @@ define(function (require, exports, module) {
             method: 'post',
             success: function(res){
                 if(res.code == 0){
-                    flight_grid.refresh();
+                    shipping_order_grid.refresh();
                 }else{
                     alert(res.msg || '删除失败')
                 }
@@ -111,7 +109,7 @@ define(function (require, exports, module) {
                     var data = JSON.parse(info.response) || {};
                     if (data.code == 0) {
                         showMessage('上传成功！');
-                        flight_grid.refresh();
+                        shipping_order_grid.refresh();
                     } else {
                         showMessage('上传失败！\r\n' + data.detail.join('\r\n'), false, 4000);
                     }
