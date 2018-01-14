@@ -98,6 +98,9 @@ class PgOrderController extends ControllerBase
     {
         $page = Yii::$app->request->get('page', 1);
         $pageSize = Yii::$app->request->get('pageSize', 10);
+        $conditions['like']['simple_code'] = Yii::$app->request->get('simple_code');
+        $conditions['like']['flight_num'] = Yii::$app->request->get('flight_num');
+        $conditions['like']['destination_station'] = Yii::$app->request->get('destination_station');
         $conditions['ge']['flight_date'] = Yii::$app->request->get('start_date');
         $conditions['le']['flight_date'] = Yii::$app->request->get('end_date');
         $result = $this->_service->getList($page, $pageSize, $conditions);
@@ -114,7 +117,7 @@ class PgOrderController extends ControllerBase
     {
         try {
             $data = Yii::$app->request->post();
-            $id = $this->_service->save($data);
+            $id = $this->_service->save($data, 'pg');
             return $this->asJson(['code' => 0, 'msg' => ($data['id'] ? '修改成功' : '新增成功'), 'data' => ['id' => $id]]);
         } catch (\Exception $ex) {
             \Yii::error($ex->getMessage());

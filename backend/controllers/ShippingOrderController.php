@@ -114,7 +114,7 @@ class ShippingOrderController extends ControllerBase
     {
         try {
             $data = Yii::$app->request->post();
-            $id = $this->_service->save($data, 'pg');
+            $id = $this->_service->save($data, 'common');
             return $this->asJson(['code' => 0, 'msg' => ($data['id'] ? '修改成功' : '新增成功'), 'data' => ['id' => $id]]);
         } catch (\Exception $ex) {
             \Yii::error($ex->getMessage());
