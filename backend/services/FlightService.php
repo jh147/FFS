@@ -173,7 +173,7 @@ class FlightService extends ServiceBase
             'F' => ['column' => '始发站', 'type' => 'string', 'required' => false, 'field_name' => 'start_station'],
             'G' => ['column' => '起飞1', 'type' => 'string', 'required' => false, 'field_name' => 'take_off_1'],
             'H' => ['column' => '降落1', 'type' => 'string', 'required' => false, 'field_name' => 'land_1'],
-            'I' => ['column' => '经停站', 'type' => 'string', 'required' => false, 'field_name' => 'stopover_station_1'],
+            'I' => ['column' => '经停站', 'type' => 'string', 'required' => false, 'field_name' => 'stopover_station'],
             'J' => ['column' => '起飞2', 'type' => 'string', 'required' => false, 'field_name' => 'take_off_2'],
             'K' => ['column' => '降落2', 'type' => 'string', 'required' => false, 'field_name' => 'land_2'],
             'L' => ['column' => '目的站', 'type' => 'string', 'required' => false, 'field_name' => 'destination_station'],

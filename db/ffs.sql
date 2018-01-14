@@ -111,17 +111,16 @@ CREATE TABLE IF NOT EXISTS `goods_class` (
 -- Table structure for shipping
 -- ----------------------------
 CREATE TABLE IF NOT EXISTS `shipping_order` (
-    `id` char(36) NOT NULL,
+  `id` char(36) NOT NULL,
+  `type` varchar(20) NOT NULL COMMENT '订单类型：common, pg',
   `flight_date` varchar(20) NOT NULL COMMENT '航班日期',
   `prefix` varchar(20) NOT NULL COMMENT '前缀',
   `order_num` varchar(100) NOT NULL COMMENT '运单号',
   `start_station` varchar(50) NOT NULL COMMENT '始发站',
   `stopover_station` char(11) NOT NULL COMMENT '中转站',
   `destination_station` char(11) NOT NULL COMMENT '目的站',
-  `flight_num` varchar(20) NOT NULL,
-  `flight_id` char(36) NOT NULL COMMENT '航班ID',
-  `agent_simple_code` varchar(50) NOT NULL,
-  `agent_id` char(36) NOT NULL COMMENT '代理人ID',
+  `flight_num` varchar(20) NOT NULL COMMENT '航班号',
+  `simple_code` varchar(50) NOT NULL,
   `freight_rates_code` varchar(50) NOT NULL COMMENT '运价代码',
   `product_name` varchar(100) NOT NULL COMMENT '品名',
   `quantity` int(4) NOT NULL DEFAULT '0' COMMENT '件数',
@@ -142,5 +141,6 @@ CREATE TABLE IF NOT EXISTS `shipping_order` (
   `created_by` char(36) DEFAULT NULL COMMENT '记录创建者',
   `modified_on` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录修改时间',
   `modified_by` char(36) DEFAULT NULL COMMENT '记录修改者',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `ix_type` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='运单表';

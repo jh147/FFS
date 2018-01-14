@@ -20,9 +20,7 @@ class OrderModel extends ModelBase
     public $stopover_station;
     public $destination_station;
     public $flight_num;
-    public $flight_id;
-    public $agent_simple_code;
-    public $agent_id;
+    public $simple_code;
     public $freight_rates_code;
     public $product_name;
     public $quantity;
@@ -80,7 +78,7 @@ class OrderModel extends ModelBase
             ['order_num', 'required'],
             ['order_num', 'string', 'min' => 2, 'max' => 100],
 
-            [['flight_date', 'prefix', 'order_num', 'start_station', 'stopover_station', 'destination_station', 'flight_num', 'flight_id', 'agent_simple_code', 'agent_id', 'freight_rates_code', 'product_name'], 'string', 'min' => 1, 'max' => 255],
+            [['flight_date', 'prefix', 'order_num', 'start_station', 'stopover_station', 'destination_station', 'flight_num', 'simple_code', 'freight_rates_code', 'product_name'], 'string', 'min' => 1, 'max' => 255],
             [['freight_rates', 'freight_fee', 'fuel_fee', 'freight_total_fee'], 'double'],
             [[ 'quantity', 'actual_weight', 'billing_weight'], 'integer'],
 
