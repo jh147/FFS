@@ -194,7 +194,7 @@ class OrderService extends ServiceBase
                 'E' => ['column' => '中转站', 'type' => 'string', 'required' => false, 'field_name' => 'stopover_station', 'maxlen' => 3],
                 'F' => ['column' => '目的站', 'type' => 'string', 'required' => false, 'field_name' => 'destination_station', 'maxlen' => 3],
                 'G' => ['column' => '航班号', 'type' => 'mumber', 'required' => false, 'field_name' => 'flight_num', 'maxlen' => 4],
-                'H' => ['column' => '代理人简码', 'type' => 'string', 'required' => false, 'field_name' => 'agent_simple_code', 'maxlen' => 10],
+                'H' => ['column' => '代理人简码', 'type' => 'string', 'required' => false, 'field_name' => 'simple_code', 'maxlen' => 10],
                 'I' => ['column' => '运价代码', 'type' => 'string', 'required' => false, 'field_name' => 'freight_rates_code', 'maxlen' => 10],
                 'J' => ['column' => '品名', 'type' => 'string', 'required' => false, 'field_name' => 'product_name', 'maxlen' => 150],
                 'K' => ['column' => '件数', 'type' => 'mumber', 'required' => false, 'field_name' => 'quantity', 'min' => 0, 'max' => 10000],
