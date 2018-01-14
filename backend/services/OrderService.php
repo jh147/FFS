@@ -283,6 +283,9 @@ class OrderService extends ServiceBase
                 $fieldData[$columnRules[$key]['field_name']] = $value;
             }
         }
+        if ($fieldData) {
+            $fieldData['type'] = $type;
+        }
         return $fieldData;
     }
 }
