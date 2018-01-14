@@ -31,8 +31,9 @@ $this->title = '运单';
         <label class="form-label col-md-1">代理人</label>
         <div class="col-md-5 form-lookup clearfix" id="agent">
             <div class="search-bar">
-                <input type="text" class="search-input" placeholder="请输入代理人简码" name="name" id="agent_input">
-                <input type="hidden" name="id" id="agent_input_id" value="">
+                <input type="text" class="search-input" 
+                placeholder="请输入代理人简码" name="name" id="agent_input" value="<?= $data['agent_simple_code']?>">
+                <input type="hidden" name="id" id="agent_input_id" value="<?= $data['agent_id']?>">
                 <span class="x-icon x-icon-clear" id="x_clear" style="display: none;">×</span>
                 <div class="search-btn search-icon"></div>
             </div>
@@ -48,7 +49,7 @@ $this->title = '运单';
     <div class="form-group">
         <label class="form-label col-md-1">前缀</label>
         <div class="col-md-3">
-            <input type="text" class="form-control " id="prefix" value="<?= $data['prefix'] ?>">
+            <input type="text" class="form-control" id="prefix" value="<?= $data['prefix'] ?>">
         </div>
         <label class="form-label col-md-2 align-c">运单号</label>
         <div class="col-md-3">
@@ -60,8 +61,9 @@ $this->title = '运单';
         <label class="form-label col-md-1">航班号</label>
         <div class="col-md-3 form-lookup clearfix" id="flight">
             <div class="search-bar">
-                <input type="text" class="search-input" placeholder="请输入航班号" name="name" id="flight_input">
-                <input type="hidden" name="id" id="flight_input_id" value="">
+                <input type="text" class="search-input" placeholder="请输入航班号" 
+                    id="flight_input" value="<?= $data['flight_num']?>">
+                <input type="hidden" name="id" id="flight_input_id" value="<?= $data['flight_id']?>">
                 <span class="x-icon x-icon-clear" id="x_clear" style="display: none;">×</span>
                 <div class="search-btn search-icon"></div>
             </div>
@@ -93,7 +95,8 @@ $this->title = '运单';
         <label class="form-label col-md-1">运价代码</label>
         <div class="col-md-3 form-lookup clearfix" id="freight_rates_code">
             <div class="search-bar">
-                <input type="text" class="search-input" placeholder="请输入运价代码" name="name" id="freight_rates_code_input">
+                <input type="text" class="search-input" placeholder="请输入运价代码" 
+                    id="freight_rates_code_input" value="<?= $data['freight_rates_code']?>">
                 <input type="hidden" name="id" id="freight_rates_code_id" value="">
                 <span class="x-icon x-icon-clear" id="x_clear" style="display: none;">×</span>
                 <div class="search-btn search-icon"></div>
@@ -129,7 +132,7 @@ $this->title = '运单';
         </div>
         <label class="form-label col-md-2 align-c">费率（净运价）</label>
         <div class="col-md-3">
-            <input type="text" class="form-control " id="freight_rates" value="<?= $data['freight_rates'] ?>">
+            <input type="text" class="form-control" id="freight_rates" value="<?= $data['freight_rates'] ?>">
         </div>
     </div>
     
