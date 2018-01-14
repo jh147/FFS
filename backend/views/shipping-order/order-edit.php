@@ -74,29 +74,40 @@ $this->title = '运单';
         </div>
         <label class="form-label col-md-2 align-c">始发站</label>
         <div class="col-md-3">
-            <input type="text" class="form-control " readonly="readonly" id="start_station" value="<?= $data['start_station'] ?>" tabIndex="-1">
+            <input type="text" class="form-control" id="start_station" value="<?= $data['start_station'] ?>" tabIndex="-1">
         </div>
     </div>
     <div class="form-group">
         
         <label class="form-label col-md-1 ">中转站</label>
         <div class="col-md-3">
-            <input type="text" class="form-control" readonly="readonly" id="stopover_station" value="<?= $data['stopover_station'] ?>" tabIndex="-1">
+            <input type="text" class="form-control" id="stopover_station" value="<?= $data['stopover_station'] ?>" tabIndex="-1">
         </div>
         <label class="form-label col-md-2 align-c">目的站</label>
         <div class="col-md-3">
-            <input type="text" class="form-control" readonly="readonly" id="destination_station" value="<?= $data['destination_station'] ?>" tabIndex="-1">
+            <input type="text" class="form-control" id="destination_station" value="<?= $data['destination_station'] ?>" tabIndex="-1">
         </div>
     </div>
     
     <div class="form-group">
         <label class="form-label col-md-1">运价代码</label>
-        <div class="col-md-3">
-            <input type="text" class="form-control" id="take_off_1" value="<?= $data['take_off_1'] ?>">
+        <div class="col-md-3 form-lookup clearfix" id="freight_rates_code">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="请输入运价代码" name="name" id="freight_rates_code_input">
+                <input type="hidden" name="id" id="freight_rates_code_id" value="">
+                <span class="x-icon x-icon-clear" id="x_clear" style="display: none;">×</span>
+                <div class="search-btn search-icon"></div>
+            </div>
+            <div class="grid " id="goods_grid" style="z-index: 10; width: 100%; height: 180px;">
+                <table class="table">
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <label class="form-label col-md-2 align-c">品名</label>
         <div class="col-md-3">
-            <input type="text" class="form-control" id="product_name" value="<?= $data['product_name'] ?>">
+            <input type="text" class="form-control" readonly="readonly" id="product_name" value="<?= $data['product_name'] ?>">
         </div>
     </div>
    
@@ -147,6 +158,9 @@ $this->title = '运单';
 </script>
 <script type="text/template" id="flights_grid_template">
     <td><%- flight_num %> - <%- air_line %></td>
+</script>
+<script type="text/template" id="goods_grid_template">
+    <td><%- freight_rates_code %> - <%- product_name %></td>
 </script>
 <script type="text/javascript">
     seajs.use('/js/shipping-order/order-edit.js');

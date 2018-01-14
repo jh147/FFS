@@ -62,7 +62,7 @@ $this->title = '航班';
     <div class="form-group">
         <label class="form-label col-md-1">经停站</label>
         <div class="col-md-3">
-            <input type="text" class="form-control fm_required" id="stopover_station_1" value="<?= $data['stopover_station_1'] ?>">
+            <input type="text" class="form-control fm_required" id="stopover_station" value="<?= $data['stopover_station'] ?>">
         </div>
     </div>
     <div class="form-group">

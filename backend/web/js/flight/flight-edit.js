@@ -23,7 +23,7 @@ define(function (require, exports, module) {
                 'start_station',
                 'take_off_1',
                 'land_1',
-                'stopover_station_1',
+                'stopover_station',
                 'take_off_2',
                 'land_2',
                 'destination_station',
@@ -38,7 +38,7 @@ define(function (require, exports, module) {
                 'start_station': '始发站',
                 'take_off_1': '起飞1',
                 'land_1': '降落1',
-                'stopover_station_1': '经停站',
+                'stopover_station': '经停站',
                 'start_date': '开始日期',
                 'end_date': '结束日期'
             },

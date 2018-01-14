@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `flight` (
   `start_station` varchar(50) NOT NULL COMMENT '始发站',
   `take_off_1` varchar(50) NOT NULL COMMENT '起飞1',
   `land_1` varchar(50) NOT NULL COMMENT '降落1',
-  `stopover_station_1` char(11) NOT NULL COMMENT '经停站',
+  `stopover_station` char(11) NOT NULL COMMENT '经停站',
   `take_off_2` varchar(50) NOT NULL COMMENT '起飞2',
   `land_2` varchar(50) NOT NULL COMMENT '降落2',
   `destination_station` char(11) NOT NULL COMMENT '目的站',
