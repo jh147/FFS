@@ -104,6 +104,8 @@ class PgOrderController extends ControllerBase
         $conditions['like']['destination_station'] = Yii::$app->request->get('destination_station');
         $conditions['ge']['flight_date'] = Yii::$app->request->get('start_date');
         $conditions['le']['flight_date'] = Yii::$app->request->get('end_date');
+
+        $conditions['ge']['pg_quantity'] = 0;//拉货件数要大于0
         $result = $this->_service->getList($page, $pageSize, $conditions);
 
         return $this->asJson($result);
