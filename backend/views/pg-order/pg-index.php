@@ -8,16 +8,16 @@ $this->title = '拉货';
     
     <ul class="search-con clearfix">
         <li>
-            <span>代理人</span>
-            <input type="text" class="form-control" placeholder="" style="width:100px;" id="simple_code">
-        </li>
-        <li>
             <span>航班号</span>
             <input type="text" class="form-control" placeholder="" style="width:100px;" id="flight_num">
         </li>
         <li>
             <span>目的站</span>
             <input type="text" class="form-control" placeholder="" style="width:100px;" id="destination_station">
+        </li>
+        <li>
+            <span>代理人</span>
+            <input type="text" class="form-control" placeholder="" style="width:100px;" id="simple_code">
         </li>
         <li class="search-inline">
             <span>开始日期</span>
@@ -38,12 +38,12 @@ $this->title = '拉货';
             <div class="grid-btns clearfix">
                 <div class="pull-right">
                     <button type="button" class="btn btn-primary grid-btn-sep" id="import_orders_btn">导入</button>
-                    <a type="button" class="btn btn-primary"  href="/pg/edit">新增</a>
+                    <a type="button" class="btn btn-primary"  href="/pg-order/edit">新增</a>
                 </div>
             </div>
         </div>
                              
-        <div class="grid-content" id="shipping_order_grid">
+        <div class="grid-content" id="pg_order_grid">
             <table class="table form">
                 <thead>
                   <tr>
@@ -52,6 +52,7 @@ $this->title = '拉货';
                     <th>运单号</th>
                     <th>航班号</th>
                     <th>目的站</th>
+                    <th>代理人</th>
                     <th>重量</th>
                     <th>费率</th>
                     <th>运费</th>
@@ -68,14 +69,16 @@ $this->title = '拉货';
         </div>
     </div>
     
-    <script type="text/template" id="shipping_order_grid_template">
+    <script type="text/template" id="pg_order_grid_template">
         <td class="align-c"><%- i %></td>
         <td><%- flight_date %></td>
         <td><%- order_num %></td>
         <td><%- flight_num %></td>
         <td><%- destination_station%></td>
+        <td><%- simple_code%></td>
         <td><%- billing_weight%></td>
         <td><%- freight_rates%></td>
+        <td><%- freight_fee%></td>
         <td><%- pg_weight%></td>
         <td><%- pg_reason%></td>
         <td><%- pg_processing_method%></td>
@@ -87,6 +90,6 @@ $this->title = '拉货';
     </script>
     
     <script type="text/javascript">
-        seajs.use('/js/pg/order-index.js');
+        seajs.use('/js/pg-order/pg-index.js');
     </script>
 </div>
