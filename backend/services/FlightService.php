@@ -113,7 +113,7 @@ class FlightService extends ServiceBase
                 $values[] = array_values($fieldData);
                 $this->_importResult['success']['导入成功']++;
             }
-            $this->_respository->batchInsert('flight', $cols, $values);
+            $this->_respository->batchInsert(Flight::tableName(), $cols, $values);
         } catch (\Exception $ex) {
             \Yii::error($ex);
             return ["code" => 40014, "msg" => '航班号导入失败', "detail" => ['excel中数据格式不符合要求，' . $ex->getMessage()]];

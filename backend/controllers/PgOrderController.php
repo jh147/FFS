@@ -8,15 +8,15 @@ use backend\services\OrderService;
 use yii\web\UploadedFile;
 
 /**
- * Class ShippingOrderController
+ * Class PgOrderController
  * @package backend\controllers
  */
-class ShippingOrderController extends ControllerBase
+class PgOrderController extends ControllerBase
 {
     private $_service;
 
     /**
-     * ShippingOrderController constructor.
+     * PgOrderController constructor.
      * @param string $id
      * @param \yii\base\Module $module
      * @param OrderService $orderService
@@ -29,7 +29,7 @@ class ShippingOrderController extends ControllerBase
     }
 
     /**
-     * 基础数据 - 运单
+     * 基础数据 - 拉货
      * @inheritdoc
      */
     public function behaviors()
@@ -106,7 +106,7 @@ class ShippingOrderController extends ControllerBase
     }
 
     /**
-     * 保存运单
+     * 保存拉货
      *
      * @return string
      */
@@ -114,7 +114,7 @@ class ShippingOrderController extends ControllerBase
     {
         try {
             $data = Yii::$app->request->post();
-            $id = $this->_service->save($data, 'pg');
+            $id = $this->_service->save($data);
             return $this->asJson(['code' => 0, 'msg' => ($data['id'] ? '修改成功' : '新增成功'), 'data' => ['id' => $id]]);
         } catch (\Exception $ex) {
             \Yii::error($ex->getMessage());
@@ -145,7 +145,7 @@ class ShippingOrderController extends ControllerBase
     {
         set_time_limit(0);
         $file = UploadedFile::getInstanceByName('file');
-        $result = $this->_service->import($file, 'common');
+        $result = $this->_service->import($file, 'pg');
 
         return json_encode($result);
     }
