@@ -87,8 +87,8 @@ AppAsset::register($this);
                     <dt>
                         <span class="glyphicon glyphicon-th-large align-m" aria-hidden="true"></span><span class="align-m">日常数据</span>
                     </dt>
-                    <dd>
-                        <a href="javascript:;">运单</a>
+                    <dd class="<?php if($this->title == '运单'){ echo 'on';} ?>">
+                        <a href="/shipping-order/index">运单</a>
                     </dd>
                     <dd>
                         <a href="javascript:;">拉货</a>
