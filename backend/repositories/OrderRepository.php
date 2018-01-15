@@ -24,26 +24,7 @@ class OrderRepository extends RepositoryBase
     public function getList($skip, $limit, $conditions)
     {
         $sqlObj = ShippingOrder::find()->where('1=1');
-        if ($conditions['eq']) {
-            foreach ($conditions['eq'] as $k => $v) {
-                $sqlObj->andFilterWhere(['=', $k, $v]);
-            }
-        }
-        if ($conditions['like']) {
-            foreach ($conditions['like'] as $k => $v) {
-                $sqlObj->andFilterWhere(['like', $k, $v]);
-            }
-        }
-        if ($conditions['ge']) {
-            foreach ($conditions['ge'] as $k => $v) {
-                $sqlObj->andFilterWhere(['>=', $k, $v]);
-            }
-        }
-        if ($conditions['le']) {
-            foreach ($conditions['le'] as $k => $v) {
-                $sqlObj->andFilterWhere(['<=', $k, $v]);
-            }
-        }
+        $sqlObj = $this->handleConditions($sqlObj, $conditions);
         $items = $sqlObj->orderBy(['created_on' => SORT_DESC])
             ->offset($skip)
             ->limit($limit)
@@ -58,20 +39,32 @@ class OrderRepository extends RepositoryBase
      * 判断字段值是否唯一
      * @param $field
      * @param $val
-     * @param $type
      * @param $id
      * @return bool
      */
-    public function isExists($field, $val, $type, $id = null)
+    public function isExists($field, $val, $id = null)
     {
         return ShippingOrder::find()
-            ->where([$field => $val, 'type' => $type])
+            ->where([$field => $val])
             ->andFilterWhere(['!=', 'id', $id])
             ->exists();
     }
 
     /**
-     * 获取列表
+     * 根据运单号获取记录
+     * @param $orderNum
+     * @return array|false
+     */
+    public function getByOrderNum($orderNum)
+    {
+        return ShippingOrder::find()
+            ->where(['order_num' => $orderNum])
+            ->createCommand()
+            ->queryOne();
+    }
+
+    /**
+     * 获取日常营业列表
      * @param $skip
      * @param $limit
      * @param $conditions
@@ -80,36 +73,15 @@ class OrderRepository extends RepositoryBase
     public function getDailBusiness($skip, $limit, $conditions)
     {
         $sqlObj = ShippingOrder::find()->where('1=1');
-        if ($conditions['eq']) {
-            foreach ($conditions['eq'] as $k => $v) {
-                $sqlObj->andFilterWhere(['=', $k, $v]);
-            }
-        }
-        if ($conditions['like']) {
-            foreach ($conditions['like'] as $k => $v) {
-                $sqlObj->andFilterWhere(['like', $k, $v]);
-            }
-        }
-        if ($conditions['ge']) {
-            foreach ($conditions['ge'] as $k => $v) {
-                $sqlObj->andFilterWhere(['>=', $k, $v]);
-            }
-        }
-        if ($conditions['le']) {
-            foreach ($conditions['le'] as $k => $v) {
-                $sqlObj->andFilterWhere(['<=', $k, $v]);
-            }
-        }
-        $items = $sqlObj->select('*')
+        $sqlObj = $this->handleConditions($sqlObj, $conditions);
+        $items = $sqlObj->select('prefix, order_num, flight_num, destination_station, flight_date, simple_code, quantity, actual_weight, (actual_weight - pg_weight) as real_weight, freight_rates_code, product_name, freight_rates')
             ->orderBy(['created_on' => SORT_DESC])
             ->offset($skip)
             ->limit($limit)
-            ->groupBy('order_num')
             ->createCommand()
             ->queryAll();
 
         $total = $sqlObj
-            ->groupBy('order_num')
             ->count();
         return ['items' => $items, 'total' => $total];
     }

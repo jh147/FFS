@@ -63,7 +63,8 @@ CREATE TABLE IF NOT EXISTS `agents` (
   `created_by` char(36) DEFAULT NULL COMMENT '记录创建者',
   `modified_on` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录修改时间',
   `modified_by` char(36) DEFAULT NULL COMMENT '记录修改者',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `ix_name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='代理人表';
 
 -- ----------------------------
@@ -88,7 +89,8 @@ CREATE TABLE IF NOT EXISTS `flight` (
   `created_by` char(36) DEFAULT NULL COMMENT '记录创建者',
   `modified_on` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录修改时间',
   `modified_by` char(36) DEFAULT NULL COMMENT '记录修改者',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `ix_flight_num` (`flight_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='航班表';
 
 
@@ -104,7 +106,8 @@ CREATE TABLE IF NOT EXISTS `goods_class` (
   `created_by` char(36) DEFAULT NULL COMMENT '记录创建者',
   `modified_on` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录修改时间',
   `modified_by` char(36) DEFAULT NULL COMMENT '记录修改者',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `ix_product_name` (`product_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='货物种类表';
 
 -- ----------------------------
@@ -112,7 +115,6 @@ CREATE TABLE IF NOT EXISTS `goods_class` (
 -- ----------------------------
 CREATE TABLE IF NOT EXISTS `shipping_order` (
   `id` char(36) NOT NULL,
-  `type` varchar(20) NOT NULL COMMENT '订单类型：common, pg',
   `flight_date` varchar(20) NOT NULL COMMENT '航班日期',
   `prefix` varchar(20) NOT NULL COMMENT '前缀',
   `order_num` varchar(100) NOT NULL COMMENT '运单号',
@@ -142,5 +144,5 @@ CREATE TABLE IF NOT EXISTS `shipping_order` (
   `modified_on` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录修改时间',
   `modified_by` char(36) DEFAULT NULL COMMENT '记录修改者',
   PRIMARY KEY (`id`),
-  KEY `ix_type` (`type`)
+  KEY `ix_order_num` (`order_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='运单表';

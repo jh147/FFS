@@ -114,16 +114,13 @@ class OrderService extends ServiceBase
             //校验成功，开始导入数据
             \Yii::info('002.数据导入：校验成功，开始导入数据。' . memory_get_usage());
             $this->_importResult['success']['导入成功'] = $this->_importResult['fail']['导入失败'] = 0;
-            $cols = $values = [];
-            foreach ($excelData as $row) {
-                $fieldData = $this->getFieldData($row, $type);
-                if (empty($cols)) {
-                    $cols = array_keys($fieldData);
-                }
-                $values[] = array_values($fieldData);
-                $this->_importResult['success']['导入成功']++;
+
+            if ($type == 'common') {
+                return $this->batchInsert($excelData, $type);
+            } else {
+                return $this->batchUpdate($excelData, $type);
             }
-            $this->_respository->batchInsert(ShippingOrder::tableName(), $cols, $values);
+
         } catch (\Exception $ex) {
             \Yii::error($ex);
             return ["code" => 40014, "msg" => $funcName . '导入失败', "detail" => ['excel中数据格式不符合要求，' . $ex->getMessage()]];
@@ -156,6 +153,9 @@ class OrderService extends ServiceBase
                 if ($columnRules[$key]['required'] && $value === '') {
                     $failRows['必填值为空'][] = $key . key($dataArray);
                 }
+                if ($columnRules[$key]['requiredExists'] && $value && !$this->_respository->isExists($columnRules[$key]['field_name'], $value)) {
+                    $failRows[$columnRules[$key]['msg']][] = $key . key($dataArray);
+                }
                 //字符长度
                 if ($columnRules[$key]['type'] == 'string' && $columnRules[$key]['maxlen'] && $value != '' && strlen($value) > $columnRules[$key]['maxlen']) {
                     $failRows['字符长度超长'][] = $key . key($dataArray);
@@ -168,7 +168,7 @@ class OrderService extends ServiceBase
                     $failRows['数字大于最大值'][] = $key . key($dataArray);
                 }
                 //字段值是否唯一
-                if ($columnRules[$key]['unique'] && $value && $this->_respository->isExists($columnRules[$key]['field_name'], $value, $type)) {
+                if ($columnRules[$key]['unique'] && $value && $this->_respository->isExists($columnRules[$key]['field_name'], $value)) {
                     $failRows[$columnRules[$key]['column'] . '已存在'][] = $key . key($dataArray);
                 }
             }
@@ -186,11 +186,12 @@ class OrderService extends ServiceBase
     private function excelColumnRules($type)
     {
         if ($type == 'common') {
+            //导入运单时判断运单号是否存在
             return [
                 'A' => ['column' => '航班日期', 'type' => 'string', 'required' => false, 'field_name' => 'flight_date'],
                 'B' => ['column' => '前缀', 'type' => 'mumber', 'required' => true, 'field_name' => 'prefix', 'maxlen' => 3],
                 'C' => ['column' => '运单号', 'type' => 'mumber', 'required' => true, 'unique' => true, 'field_name' => 'order_num', 'maxlen' => 8],
-                'D' => ['column' => '始发站', 'type' => 'string', 'required' => true, 'unique' => true, 'field_name' => 'start_station'],
+                'D' => ['column' => '始发站', 'type' => 'string', 'required' => true, 'field_name' => 'start_station'],
                 'E' => ['column' => '中转站', 'type' => 'string', 'required' => false, 'field_name' => 'stopover_station', 'maxlen' => 3],
                 'F' => ['column' => '目的站', 'type' => 'string', 'required' => false, 'field_name' => 'destination_station', 'maxlen' => 3],
                 'G' => ['column' => '航班号', 'type' => 'mumber', 'required' => false, 'field_name' => 'flight_num', 'maxlen' => 4],
@@ -206,11 +207,12 @@ class OrderService extends ServiceBase
                 'Q' => ['column' => '运费总额（含燃油）', 'type' => 'mumber', 'required' => false, 'field_name' => 'freight_total_fee'],
             ];
         } else {
+            //导入拉货单时判断运单号是否存在，不存在不让导入
             return [
                 'A' => ['column' => '航班日期', 'type' => 'string', 'required' => false, 'field_name' => 'flight_date'],
                 'B' => ['column' => '前缀', 'type' => 'string', 'required' => true, 'field_name' => 'prefix', 'maxlen' => 3],
-                'C' => ['column' => '运单号', 'type' => 'string', 'required' => true, 'unique' => true, 'field_name' => 'order_num', 'maxlen' => 8],
-                'D' => ['column' => '航班号', 'type' => 'string', 'required' => true, 'unique' => true, 'field_name' => 'flight_num', 'maxlen' => 4],
+                'C' => ['column' => '运单号', 'type' => 'string', 'required' => true, 'requiredExists' => true, 'field_name' => 'order_num', 'maxlen' => 8, 'msg' => '运单号不存在'],
+                'D' => ['column' => '航班号', 'type' => 'string', 'required' => true, 'field_name' => 'flight_num', 'maxlen' => 4],
                 'E' => ['column' => '拉货件数', 'type' => 'string', 'required' => false, 'field_name' => 'pg_quantity', 'min' => 0, 'max' => 10000],
                 'F' => ['column' => '拉货重量', 'type' => 'string', 'required' => false, 'field_name' => 'pg_weight', 'min' => 0, 'max' => 1000000],
                 'G' => ['column' => '费率', 'type' => 'string', 'required' => false, 'field_name' => 'pg_freight_rates', 'min' => 0, 'max' => 1000],
@@ -283,10 +285,51 @@ class OrderService extends ServiceBase
                 $fieldData[$columnRules[$key]['field_name']] = $value;
             }
         }
-        if ($fieldData) {
-            $fieldData['type'] = $type;
-        }
         return $fieldData;
+    }
+
+    /**
+     * @param $excelData
+     * @param $type
+     * @return $this|null
+     */
+    public function batchInsert($excelData, $type)
+    {
+        $cols = $values = [];
+        foreach ($excelData as $row) {
+            $fieldData = $this->getFieldData($row, $type);
+            if (empty($cols)) {
+                $cols = array_keys($fieldData);
+            }
+            $values[] = array_values($fieldData);
+            $this->_importResult['success']['导入成功']++;
+        }
+
+        return $this->_respository->batchInsert(ShippingOrder::tableName(), $cols, $values);
+    }
+
+    /**
+     * @param $excelData
+     * @param $type
+     * @return bool|null
+     */
+    public function batchUpdate($excelData, $type)
+    {
+        $cols = $cons = [];
+        $k = 0;
+        foreach ($excelData as $row) {
+            $fieldData = $this->getFieldData($row, $type);
+            if ($fieldData['order_num']) {
+                $orderRow[$k] = $this->_respository->getByOrderNum($fieldData['order_num']);
+                $orderRow[$k] = array_merge($orderRow[$k], $fieldData);
+                $cons[$k] = ['id' => $orderRow['id']];
+                $k++;
+            }
+
+            $this->_importResult['success']['导入成功']++;
+        }
+
+        return $this->_respository->batchUpdate(ShippingOrder::tableName(), $cols, $cons);
     }
 
     /**

@@ -99,8 +99,8 @@ class FlightController extends ControllerBase
         $pageSize = Yii::$app->request->get('pageSize', 10);
         $conditions['like']['flight_num'] = Yii::$app->request->get('flight_num');
         $conditions['like']['start_station'] = Yii::$app->request->get('start_station');
-        $conditions['ge']['start_date'] = Yii::$app->request->get('start_date');
-        $conditions['le']['end_date'] = Yii::$app->request->get('end_date');
+        $conditions['geq']['start_date'] = Yii::$app->request->get('start_date');
+        $conditions['leq']['end_date'] = Yii::$app->request->get('end_date');
         $result = $this->_service->getList($page, $pageSize, $conditions);
 
         return $this->asJson($result);

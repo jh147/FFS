@@ -56,4 +56,69 @@ abstract class RepositoryBase
         }
         return $this->getDb()->createCommand()->batchInsert($table, $cols, $rows)->execute();
     }
+
+
+    /**
+     * 批量更新
+     * @param $table
+     * @param $cols
+     * @param $conds
+     * @return bool|null
+     * @throws \yii\db\Exception
+     */
+    public function batchUpdate($table, $cols, $conds)
+    {
+        if (empty($table) || empty($cols) || empty($condArr)) {
+            return null;
+        }
+
+        foreach ($cols as $k => $colArr) {
+            $condArr = $conds[$k];
+            $this->getDb()->createCommand()->update($table, $colArr, $condArr)->execute();
+        }
+        return true;
+    }
+
+
+    /**
+     * 处理SQL条件
+     * @param $sqlObj
+     * @param $conditions
+     * @return mixed
+     */
+    public function handleConditions($sqlObj, $conditions)
+    {
+        if ($conditions['eq']) {
+            foreach ($conditions['eq'] as $k => $v) {
+                $sqlObj->andFilterWhere(['=', $k, $v]);
+            }
+        }
+        if ($conditions['like']) {
+            foreach ($conditions['like'] as $k => $v) {
+                $sqlObj->andFilterWhere(['like', $k, $v]);
+            }
+        }
+        if ($conditions['geq']) {
+            foreach ($conditions['geq'] as $k => $v) {
+                $sqlObj->andFilterWhere(['>=', $k, $v]);
+            }
+        }
+        if ($conditions['leq']) {
+            foreach ($conditions['leq'] as $k => $v) {
+                $sqlObj->andFilterWhere(['<=', $k, $v]);
+            }
+        }
+        if ($conditions['ge']) {
+            foreach ($conditions['ge'] as $k => $v) {
+                $sqlObj->andFilterWhere(['>', $k, $v]);
+            }
+        }
+        if ($conditions['le']) {
+            foreach ($conditions['le'] as $k => $v) {
+                $sqlObj->andFilterWhere(['<', $k, $v]);
+            }
+        }
+
+        return $sqlObj;
+    }
 }

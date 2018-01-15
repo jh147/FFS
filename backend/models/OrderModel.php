@@ -13,7 +13,6 @@ class OrderModel extends ModelBase
 {
 
     public $id;
-    public $type;
     public $flight_date;
     public $prefix;
     public $order_num;
@@ -80,7 +79,7 @@ class OrderModel extends ModelBase
             ['order_num', 'string', 'min' => 2, 'max' => 100],
             ['order_num', 'validateUnique', 'message' => '运单号已经存在'],
 
-            [['type', 'flight_date', 'prefix', 'start_station', 'stopover_station', 'destination_station', 'flight_num', 'simple_code', 'freight_rates_code', 'product_name'], 'string', 'min' => 1, 'max' => 255],
+            [['flight_date', 'prefix', 'start_station', 'stopover_station', 'destination_station', 'flight_num', 'simple_code', 'freight_rates_code', 'product_name'], 'string', 'min' => 1, 'max' => 255],
             [['freight_rates', 'freight_fee', 'fuel_fee', 'freight_total_fee'], 'double'],
             [['quantity', 'actual_weight', 'billing_weight'], 'integer'],
 
@@ -119,7 +118,7 @@ class OrderModel extends ModelBase
         switch ($attribute) {
             case 'order_num' :
                 $exists = self::$_entity->find()
-                    ->where(['order_num' => $this->order_num, 'type' => 'common'])
+                    ->where(['order_num' => $this->order_num])
                     ->andFilterWhere(['<>', 'id', $this->id])
                     ->exists();
                 if ($exists) {

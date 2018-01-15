@@ -87,8 +87,8 @@ class DailyBusinessController extends ControllerBase
         $conditions['like']['flight_num'] = Yii::$app->request->get('flight_num');
         $conditions['like']['destination_station'] = Yii::$app->request->get('destination_station');
         $conditions['like']['freight_rates_code'] = Yii::$app->request->get('freight_rates_code');
-        $conditions['ge']['flight_date'] = Yii::$app->request->get('start_date');
-        $conditions['le']['flight_date'] = Yii::$app->request->get('end_date');
+        $conditions['geq']['flight_date'] = Yii::$app->request->get('start_date');
+        $conditions['leq']['flight_date'] = Yii::$app->request->get('end_date');
 
         $result = $this->_service->getDailBusiness($page, $pageSize, $conditions);
 

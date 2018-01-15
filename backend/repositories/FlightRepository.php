@@ -24,21 +24,7 @@ class FlightRepository extends RepositoryBase
     public function getList($skip, $limit, $conditions)
     {
         $sqlObj = Flight::find()->where('1=1');
-        if ($conditions['like']) {
-            foreach ($conditions['like'] as $k => $v) {
-                $sqlObj->andFilterWhere(['like', $k, $v]);
-            }
-        }
-        if ($conditions['ge']) {
-            foreach ($conditions['ge'] as $k => $v) {
-                $sqlObj->andFilterWhere(['>=', $k, $v]);
-            }
-        }
-        if ($conditions['le']) {
-            foreach ($conditions['le'] as $k => $v) {
-                $sqlObj->andFilterWhere(['<=', $k, $v]);
-            }
-        }
+        $sqlObj = $this->handleConditions($sqlObj, $conditions);
         $items = $sqlObj->orderBy(['created_on' => SORT_DESC])
             ->offset($skip)
             ->limit($limit)

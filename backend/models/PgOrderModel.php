@@ -13,7 +13,6 @@ class PgOrderModel extends ModelBase
 {
 
     public $id;
-    public $type;
     public $flight_date;
     public $prefix;
     public $order_num;
@@ -50,7 +49,7 @@ class PgOrderModel extends ModelBase
         } else {
             $this->_one = $this->getOne();
             if (!$this->_one) {
-                throw new \InvalidArgumentException("拉货单不存在");
+                throw new \InvalidArgumentException("运单不存在");
             }
         }
         $this->setAttributes($this->_one->getAttributes(), false);
@@ -72,9 +71,9 @@ class PgOrderModel extends ModelBase
             ['order_num', 'trim'],
             ['order_num', 'required'],
             ['order_num', 'string', 'min' => 2, 'max' => 100],
-            ['order_num', 'validateUnique', 'message' => '拉货单号已经存在'],
+            ['order_num', 'validateUnique', 'message' => '运单号已经存在'],
 
-            [['type', 'flight_date', 'prefix', 'order_num', 'flight_num', 'pg_reason', 'pg_processing_method', 'pg_remark'], 'string', 'min' => 1, 'max' => 255],
+            [['flight_date', 'prefix', 'order_num', 'flight_num', 'pg_reason', 'pg_processing_method', 'pg_remark'], 'string', 'min' => 1, 'max' => 255],
             [['pg_freight_rates', 'pg_loss_fee'], 'double'],
             [[ 'pg_quantity', 'pg_weight'], 'integer'],
             ['type', 'default', 'value' => 'pg'],
@@ -112,11 +111,11 @@ class PgOrderModel extends ModelBase
         switch ($attribute) {
             case 'order_num' :
                 $exists = self::$_entity->find()
-                    ->where(['order_num' => $this->order_num, 'type' => 'common'])
+                    ->where(['order_num' => $this->order_num])
                     ->andFilterWhere(['<>', 'id', $this->id])
                     ->exists();
                 if ($exists) {
-                    $this->addError($attribute, '拉货单号已经存在');
+                    $this->addError($attribute, '运单号已经存在');
                     return false;
                 }
                 break;
