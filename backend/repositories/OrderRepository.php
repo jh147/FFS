@@ -58,13 +58,14 @@ class OrderRepository extends RepositoryBase
      * 判断字段值是否唯一
      * @param $field
      * @param $val
+     * @param $type
      * @param $id
      * @return bool
      */
-    public function isExists($field, $val, $id = null)
+    public function isExists($field, $val, $type, $id = null)
     {
         return ShippingOrder::find()
-            ->where([$field => $val])
+            ->where([$field => $val, 'type' => $type])
             ->andFilterWhere(['!=', 'id', $id])
             ->exists();
     }

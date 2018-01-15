@@ -72,6 +72,7 @@ class PgOrderModel extends ModelBase
             ['order_num', 'trim'],
             ['order_num', 'required'],
             ['order_num', 'string', 'min' => 2, 'max' => 100],
+            ['order_num', 'validateUnique', 'message' => '拉货单号已经存在'],
 
             [['type', 'flight_date', 'prefix', 'order_num', 'flight_num', 'pg_reason', 'pg_processing_method', 'pg_remark'], 'string', 'min' => 1, 'max' => 255],
             [['pg_freight_rates', 'pg_loss_fee'], 'double'],
@@ -101,4 +102,24 @@ class PgOrderModel extends ModelBase
         return false;
     }
 
+    /**
+     * 验证
+     * @param $attribute
+     * @return bool
+     */
+    public function validateUnique($attribute)
+    {
+        switch ($attribute) {
+            case 'order_num' :
+                $exists = self::$_entity->find()
+                    ->where(['order_num' => $this->order_num, 'type' => 'common'])
+                    ->andFilterWhere(['<>', 'id', $this->id])
+                    ->exists();
+                if ($exists) {
+                    $this->addError($attribute, '拉货单号已经存在');
+                    return false;
+                }
+                break;
+        }
+    }
 }

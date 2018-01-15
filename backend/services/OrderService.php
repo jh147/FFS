@@ -168,7 +168,7 @@ class OrderService extends ServiceBase
                     $failRows['数字大于最大值'][] = $key . key($dataArray);
                 }
                 //字段值是否唯一
-                if ($columnRules[$key]['unique'] && $value && $this->_respository->isExists($columnRules[$key]['field_name'], $value)) {
+                if ($columnRules[$key]['unique'] && $value && $this->_respository->isExists($columnRules[$key]['field_name'], $value, $type)) {
                     $failRows[$columnRules[$key]['column'] . '已存在'][] = $key . key($dataArray);
                 }
             }
@@ -189,7 +189,7 @@ class OrderService extends ServiceBase
             return [
                 'A' => ['column' => '航班日期', 'type' => 'string', 'required' => false, 'field_name' => 'flight_date'],
                 'B' => ['column' => '前缀', 'type' => 'mumber', 'required' => true, 'field_name' => 'prefix', 'maxlen' => 3],
-                'C' => ['column' => '运单号', 'type' => 'mumber', 'required' => true, 'field_name' => 'order_num', 'maxlen' => 8],
+                'C' => ['column' => '运单号', 'type' => 'mumber', 'required' => true, 'unique' => true, 'field_name' => 'order_num', 'maxlen' => 8],
                 'D' => ['column' => '始发站', 'type' => 'string', 'required' => true, 'unique' => true, 'field_name' => 'start_station'],
                 'E' => ['column' => '中转站', 'type' => 'string', 'required' => false, 'field_name' => 'stopover_station', 'maxlen' => 3],
                 'F' => ['column' => '目的站', 'type' => 'string', 'required' => false, 'field_name' => 'destination_station', 'maxlen' => 3],
@@ -209,7 +209,7 @@ class OrderService extends ServiceBase
             return [
                 'A' => ['column' => '航班日期', 'type' => 'string', 'required' => false, 'field_name' => 'flight_date'],
                 'B' => ['column' => '前缀', 'type' => 'string', 'required' => true, 'field_name' => 'prefix', 'maxlen' => 3],
-                'C' => ['column' => '运单号', 'type' => 'string', 'required' => true, 'field_name' => 'order_num', 'maxlen' => 8],
+                'C' => ['column' => '运单号', 'type' => 'string', 'required' => true, 'unique' => true, 'field_name' => 'order_num', 'maxlen' => 8],
                 'D' => ['column' => '航班号', 'type' => 'string', 'required' => true, 'unique' => true, 'field_name' => 'flight_num', 'maxlen' => 4],
                 'E' => ['column' => '拉货件数', 'type' => 'string', 'required' => false, 'field_name' => 'pg_quantity', 'min' => 0, 'max' => 10000],
                 'F' => ['column' => '拉货重量', 'type' => 'string', 'required' => false, 'field_name' => 'pg_weight', 'min' => 0, 'max' => 1000000],
