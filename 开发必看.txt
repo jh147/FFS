@@ -1,13 +1,13 @@
-1. ¿ª·¢ÓòÃû£ºdev.ffs.com
-	±¾µØhostsÎÄ¼þÐèÒª×÷Ó³Éä 127.0.0.1 dev.ffs.com
+1. å¼€å‘åŸŸåï¼šdev.ffs.com
+	æœ¬åœ°hostsæ–‡ä»¶éœ€è¦ä½œæ˜ å°„ 127.0.0.1 dev.ffs.com
 
-2. ¿ª·¢»·¾³£ºxampp(php > 5.5)
+2. å¼€å‘çŽ¯å¢ƒï¼šxampp(php > 5.5)
 
-3. ´úÂëÍÐ¹ÜÔÚgithub£¬µØÖ·£ºhttps://github.com/jh147/FFS.git
+3. ä»£ç æ‰˜ç®¡åœ¨githubï¼Œåœ°å€ï¼šhttps://github.com/jh147/FFS.git
 
-3. ÏÂÔØ´úÂëºó£¬µ¼ÈëÊý¾Ý¿âÎÄ¼þ £¨ÔÚmysql¿Í»§¶ËÖÐÖ´ÐÐdb/ffs.sqlÎÄ¼þ¼´¿É£©
+3. ä¸‹è½½ä»£ç åŽï¼Œå¯¼å…¥æ•°æ®åº“æ–‡ä»¶ ï¼ˆåœ¨mysqlå®¢æˆ·ç«¯ä¸­æ‰§è¡Œdb/ffs.sqlæ–‡ä»¶å³å¯ï¼‰
 
-4. ºóÌ¨Ä¬ÈÏÕËºÅÃÜÂë
+4. åŽå°é»˜è®¤è´¦å·å¯†ç 
 	admin
 	123456
 
