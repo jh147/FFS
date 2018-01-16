@@ -23,21 +23,27 @@ $this->title = '拉货';
 
     <div class="form-group">
         <label class="form-label col-md-1">运单号</label>
-        <div class="col-md-5 form-lookup clearfix" id="order">
-            <div class="search-bar">
-                <input type="text" class="search-input" 
-                placeholder="请输入代理人简码" name="name" id="order_input" value="<?= $data['order_num']?>">
-                <input type="hidden" name="id" id="order_input_id" value="<?= $data['order_num']?>">
-                <span class="x-icon x-icon-clear" id="x_clear" style="display: none;">×</span>
-                <div class="search-btn search-icon"></div>
+        <?php if($data['id']){?>
+            <div class="col-md-3">
+                <input type="text" class="form-control" readonly="readonly" id="order_num" value="<?= $data['order_num'] ?>" tabIndex="-1">
             </div>
-            <div class="grid " id="orders_grid" style="z-index: 10; width: 100%; height: 180px;">
-                <table class="table">
-                    <tbody>
-                    </tbody>
-                </table>
+        <?php }else{?>
+            <div class="col-md-5 form-lookup clearfix" id="order">
+                <div class="search-bar">
+                    <input type="text" class="search-input" 
+                    placeholder="请输入代理人简码" name="name" id="order_input" value="<?= $data['order_num']?>">
+                    <input type="hidden" name="id" id="order_input_id" value="<?= $data['order_num']?>">
+                    <span class="x-icon x-icon-clear" id="x_clear" style="display: none;">×</span>
+                    <div class="search-btn search-icon"></div>
+                </div>
+                <div class="grid " id="orders_grid" style="z-index: 10; width: 100%; height: 180px;">
+                    <table class="table">
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        <?php }?>
     </div>
 
     <div class="form-group">
