@@ -93,8 +93,8 @@ AppAsset::register($this);
                     <dd class="<?php if($this->title == '拉货'){ echo 'on';} ?>">
                         <a href="/pg-order/index">拉货</a>
                     </dd>
-                    <dd>
-                        <a href="javascript:;">日常营业</a>
+                    <dd class="<?php if($this->title == '日常营业'){ echo 'on';} ?>">
+                        <a href="/daily-business/index">日常营业</a>
                     </dd>
                 </dl>
                 <dl>
