@@ -19,7 +19,7 @@ class PgOrderModel extends ModelBase
     public $flight_num;
     public $pg_quantity;
     public $pg_weight;
-    public $pg_freight_rates;
+    public $freight_rates;
     public $pg_loss_fee;
     public $pg_reason;
     public $pg_processing_method;
@@ -74,7 +74,7 @@ class PgOrderModel extends ModelBase
             ['order_num', 'validateUnique', 'message' => '运单号已经存在'],
 
             [['flight_date', 'prefix', 'order_num', 'flight_num', 'pg_reason', 'pg_processing_method', 'pg_remark'], 'string', 'min' => 1, 'max' => 255],
-            [['pg_freight_rates', 'pg_loss_fee'], 'double'],
+            [['freight_rates', 'pg_loss_fee'], 'double'],
             [[ 'pg_quantity', 'pg_weight'], 'integer'],
 
             [['created_on', 'modified_on', 'created_by', 'modified_by'], 'string'],
