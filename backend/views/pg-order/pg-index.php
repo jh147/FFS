@@ -37,7 +37,6 @@ $this->title = '拉货';
         <div class="grid-toolbar">
             <div class="grid-btns clearfix">
                 <div class="pull-right">
-                    <button type="button" class="btn btn-primary grid-btn-sep" id="import_orders_btn">导入</button>
                     <a type="button" class="btn btn-primary"  href="/pg-order/edit">新增</a>
                 </div>
             </div>

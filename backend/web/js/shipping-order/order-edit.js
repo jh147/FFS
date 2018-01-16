@@ -79,11 +79,14 @@ define(function (require, exports, module) {
         })
     });
 
-    var today = new Date(),
+    if(!$('#order_id').val()){
+        var today = new Date(),
         yesteday = new Date(today - 24*3600*1000),
         ytd = yesteday.getFullYear() + '-' + ('0'+(yesteday.getMonth() + 1)).slice(-2) + '-' + ('0'+(yesteday.getDate() + '')).slice(-2);
 
-    $('#flight_date').val(ytd);
+        $('#flight_date').val(ytd);
+    }
+    
 
     function showMessage(msg){
         alert(msg);
