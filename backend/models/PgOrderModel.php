@@ -81,9 +81,20 @@ class PgOrderModel extends ModelBase
         ];
     }
 
+    /**
+     * 删除是指清空拉货相关的字段
+     * @return mixed
+     */
     public function delete()
     {
-        return $this->_one->delete();
+        $this->_one->pg_quantity = 0;
+        $this->_one->pg_weight = 0;
+        $this->_one->pg_freight_rates = 0.00;
+        $this->_one->pg_loss_fee = 0.00;
+        $this->_one->pg_reason = 0;
+        $this->_one->pg_processing_method = '';
+        $this->_one->pg_remark = '';
+        return $this->_one->save();
     }
 
     public function save()
