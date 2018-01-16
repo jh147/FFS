@@ -134,7 +134,6 @@ CREATE TABLE IF NOT EXISTS `shipping_order` (
   `freight_total_fee` decimal(14,2) DEFAULT '0.00' COMMENT '运费总额（含燃油）',
   `pg_quantity` int(4) DEFAULT '0' COMMENT '拉货件数',
   `pg_weight` int(4) DEFAULT '0' COMMENT '拉货重量',
-  `pg_freight_rates` decimal(14,2) DEFAULT '0.00' COMMENT '拉货费率',
   `pg_loss_fee` decimal(14,2) DEFAULT '0.00' COMMENT '拉货损失金额',
   `pg_reason` varchar(255) DEFAULT NULL COMMENT '拉货原因',
   `pg_processing_method` varchar(100) DEFAULT NULL COMMENT '拉货处理方式',

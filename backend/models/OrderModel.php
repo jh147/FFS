@@ -83,8 +83,6 @@ class OrderModel extends ModelBase
             [['freight_rates', 'freight_fee', 'fuel_fee', 'freight_total_fee'], 'double'],
             [['quantity', 'actual_weight', 'billing_weight'], 'integer'],
 
-            ['type', 'default', 'value' => 'common'],
-
             [['created_on', 'modified_on', 'created_by', 'modified_by'], 'string'],
         ];
     }

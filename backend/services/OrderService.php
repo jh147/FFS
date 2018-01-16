@@ -215,7 +215,7 @@ class OrderService extends ServiceBase
                 'D' => ['column' => '航班号', 'type' => 'string', 'required' => true, 'field_name' => 'flight_num', 'maxlen' => 4],
                 'E' => ['column' => '拉货件数', 'type' => 'string', 'required' => false, 'field_name' => 'pg_quantity', 'min' => 0, 'max' => 10000],
                 'F' => ['column' => '拉货重量', 'type' => 'string', 'required' => false, 'field_name' => 'pg_weight', 'min' => 0, 'max' => 1000000],
-                'G' => ['column' => '费率', 'type' => 'string', 'required' => false, 'field_name' => 'pg_freight_rates', 'min' => 0, 'max' => 1000],
+                'G' => ['column' => '费率', 'type' => 'string', 'required' => false, 'field_name' => 'freight_rates', 'min' => 0, 'max' => 1000],
                 'H' => ['column' => '拉货损失金额', 'type' => 'string', 'required' => false, 'field_name' => 'pg_loss_fee'],
                 'I' => ['column' => '拉货原因', 'type' => 'string', 'required' => false, 'field_name' => 'pg_reason'],
                 'J' => ['column' => '处理方式', 'type' => 'string', 'required' => false, 'field_name' => 'pg_processing_method'],
