@@ -76,7 +76,6 @@ class PgOrderModel extends ModelBase
             [['flight_date', 'prefix', 'order_num', 'flight_num', 'pg_reason', 'pg_processing_method', 'pg_remark'], 'string', 'min' => 1, 'max' => 255],
             [['pg_freight_rates', 'pg_loss_fee'], 'double'],
             [[ 'pg_quantity', 'pg_weight'], 'integer'],
-            ['type', 'default', 'value' => 'pg'],
 
             [['created_on', 'modified_on', 'created_by', 'modified_by'], 'string'],
         ];
