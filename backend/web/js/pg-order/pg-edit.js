@@ -19,12 +19,14 @@ define(function (require, exports, module) {
             $.each(['flight_date', 'prefix', 'flight_num', 'freight_rates'], function(i, key){
                 $('#'+key).val(model.get(key)||'');
             });
+            $('#order_id').val(model.get('id'));
             calcFee();
         },
         onClear: function(){
             $.each(['flight_date', 'prefix', 'flight_num', 'freight_rates'], function(i, key){
                 $('#'+key).val('');
             });
+            $('#order_id').val('');
             $('#pg_loss_fee').val('0.00')
         }
     });
