@@ -68,7 +68,7 @@ AppAsset::register($this);
         <div class="manage-container">
 
             <!-- 菜单 [[-->
-            <div class="manage-menu">
+            <div class="manage-menu" style="display:<?= Yii::$app->user->isGuest ? 'none' : '' ?>">
                 <dl>
                     <dt>
                         <span class="glyphicon glyphicon-book align-m" aria-hidden="true"></span><span class="align-m">基础数据</span>

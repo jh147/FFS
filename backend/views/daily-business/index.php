@@ -68,11 +68,11 @@ $this->title = '日常营业';
         <td><%- flight_num %></td>
         <td><%- destination_station%></td>
         <td><%- simple_code%></td>
+        <td><%- quantity%></td>
         <td><%- actual_weight%></td>
-        <td><%- actual_weight - pg_weight %></td>
         <td><%- freight_rates_code %></td>
         <td><%- freight_rates %></td>
-        <td><%- (billing_weight-pg_weight)*(freight_rates+ (prefix==='000'?0:0.2) ) %></td>
+        <td><%- real_freight_fee %></td>
     </script>
     
     <script type="text/javascript">
