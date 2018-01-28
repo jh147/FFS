@@ -74,7 +74,7 @@ class OrderRepository extends RepositoryBase
     {
         $sqlObj = ShippingOrder::find()->where('1=1');
         $sqlObj = $this->handleConditions($sqlObj, $conditions);
-        $items = $sqlObj->select('prefix, order_num, flight_num, destination_station, flight_date, simple_code, quantity, actual_weight, (actual_weight - pg_weight) as real_weight, freight_rates_code, product_name, freight_rates')
+        $items = $sqlObj->select('prefix, order_num, flight_num, destination_station, flight_date, simple_code, quantity, actual_weight, (actual_weight - pg_weight) as real_weight, freight_rates_code, product_name, freight_rates, ((billing_weight-pg_weight)*freight_rates+fuel_fee) as real_freight_fee')
             ->orderBy(['created_on' => SORT_DESC])
             ->offset($skip)
             ->limit($limit)
