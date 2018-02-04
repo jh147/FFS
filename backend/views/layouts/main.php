@@ -101,8 +101,8 @@ AppAsset::register($this);
                     <dt>
                         <span class="glyphicon glyphicon-signal align-m" aria-hidden="true"></span><span class="align-m">统计分析</span>
                     </dt>
-                    <dd>
-                        <a href="javascript:;">周期销售对比</a>
+                    <dd class="<?php if($this->title == '周期销售对比'){ echo 'on';} ?>">
+                        <a href="/sales-compare/index">周期销售对比</a>
                     </dd>
                     <dd>
                         <a href="javascript:;">周期销售分析</a>
