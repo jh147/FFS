@@ -86,12 +86,14 @@ class SalesCompareController extends ControllerBase
         $conditions = [];
         $conditions['geq']['flight_date'] = Yii::$app->request->get('last_start_date');
         $conditions['leq']['flight_date'] = Yii::$app->request->get('last_end_date');
-        $lastResult = $this->_service->getSalesCompare($conditions, $type);
+        $totalDays = floor((strtotime($conditions['leq']['flight_date']) - strtotime($conditions['geq']['flight_date'])) / 86400);
+        $lastResult = $this->_service->getSalesCompare($conditions, $type, $totalDays);
 
         $conditions = [];
         $conditions['geq']['flight_date'] = Yii::$app->request->get('this_start_date');
         $conditions['leq']['flight_date'] = Yii::$app->request->get('this_end_date');
-        $thisResult = $this->_service->getSalesCompare($conditions, $type);
+        $totalDays = floor((strtotime($conditions['leq']['flight_date']) - strtotime($conditions['geq']['flight_date'])) / 86400);
+        $thisResult = $this->_service->getSalesCompare($conditions, $type, $totalDays);
 
         $result = $this->mergeSalesCompare($lastResult, $thisResult, $type);
         return $this->asJson($result);

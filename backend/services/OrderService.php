@@ -352,16 +352,17 @@ class OrderService extends ServiceBase
     /**
      * @param $conditions
      * @param $type
+     * @param $totalDays
      * @return array
      */
-    public function getSalesCompare($conditions, $type)
+    public function getSalesCompare($conditions, $type, $totalDays)
     {
         if ($type == 'flight') {
-            return $this->_respository->getSalesCompareByFlight($conditions, 10);
+            return $this->_respository->getSalesCompareByFlight($conditions, $totalDays);
         }elseif($type == 'airline') {
-            return $this->_respository->getSalesCompareByAirline($conditions, 10);
+            return $this->_respository->getSalesCompareByAirline($conditions, $totalDays);
         }elseif($type == 'agent') {
-            return $this->_respository->getSalesCompareByAgent($conditions, 10);
+            return $this->_respository->getSalesCompareByAgent($conditions, $totalDays);
         }
 
     }
