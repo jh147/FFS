@@ -86,4 +86,64 @@ class OrderRepository extends RepositoryBase
         return ['items' => $items, 'total' => $total];
     }
 
+    /**
+     * 获取销售对比数据 - 航班
+     * @param $conditions
+     * @param $totalDays
+     * @return array
+     */
+    public function getSalesCompareByFlight($conditions, $totalDays)
+    {
+        $sqlObj = ShippingOrder::find()->where('1=1');
+        $sqlObj = $this->handleConditions($sqlObj, $conditions);
+        return $sqlObj->select('flight_num, (sum(actual_weight) - sum(pg_weight)) as real_weight, ((sum(actual_weight) - sum(pg_weight))/:totalDays) as avg_weight')
+            ->orderBy('real_weight desc')
+            ->groupBy('flight_num')
+            ->createCommand()
+            ->bindParam(':totalDays', $totalDays)
+            ->queryAll();
+    }
+
+    /**
+     * 获取销售对比数据 - 航线
+     * @param $conditions
+     * @param $totalDays
+     * @return array
+     */
+    public function getSalesCompareByAirline($conditions, $totalDays)
+    {
+        $sqlObj = ShippingOrder::find()
+            ->alias('o')
+            ->innerJoin('flight as f', 'f.flight_num = o.flight_num')
+            ->where('1=1');
+        $sqlObj = $this->handleConditions($sqlObj, $conditions);
+        return $sqlObj->select('f.air_line, (sum(actual_weight) - sum(pg_weight)) as real_weight, ((sum(actual_weight) - sum(pg_weight))/:totalDays) as avg_weight')
+            ->orderBy('real_weight desc')
+            ->groupBy('f.air_line')
+            ->createCommand()
+            ->bindParam(':totalDays', $totalDays)
+            ->queryAll();
+    }
+
+    /**
+     * 获取销售对比数据 - 代理人
+     * @param $conditions
+     * @param $totalDays
+     * @return array
+     */
+    public function getSalesCompareByAgent($conditions, $totalDays)
+    {
+        $sqlObj = ShippingOrder::find()
+            ->alias('o')
+            ->innerJoin('agents as a', 'a.simple_code = o.simple_code')
+            ->where('1=1');
+        $sqlObj = $this->handleConditions($sqlObj, $conditions);
+        return $sqlObj->select('a.name, (sum(actual_weight) - sum(pg_weight)) as real_weight, ((sum(actual_weight) - sum(pg_weight))/:totalDays) as avg_weight')
+            ->orderBy('real_weight desc')
+            ->groupBy('a.name')
+            ->createCommand()
+            ->bindParam(':totalDays', $totalDays)
+            ->queryAll();
+    }
+
 }

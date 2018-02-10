@@ -9,7 +9,7 @@
 namespace common\utils;
 
 
-class StringHelper
+class StringHelper extends \yii\helpers\StringHelper
 {
     /**
      * 36位GUID

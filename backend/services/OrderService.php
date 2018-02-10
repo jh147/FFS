@@ -348,4 +348,21 @@ class OrderService extends ServiceBase
 
         return $this->_respository->getDailBusiness($skip, $limit, $conditions);
     }
+
+    /**
+     * @param $conditions
+     * @param $type
+     * @return array
+     */
+    public function getSalesCompare($conditions, $type)
+    {
+        if ($type == 'flight') {
+            return $this->_respository->getSalesCompareByFlight($conditions, 10);
+        }elseif($type == 'airline') {
+            return $this->_respository->getSalesCompareByAirline($conditions, 10);
+        }elseif($type == 'agent') {
+            return $this->_respository->getSalesCompareByAgent($conditions, 10);
+        }
+
+    }
 }
