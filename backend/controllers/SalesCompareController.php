@@ -134,15 +134,22 @@ class SalesCompareController extends ControllerBase
                 $row[$groupField] = $groupVal;
                 $row['last_real_weight'] = $lastResult[$groupVal]['real_weight'];
                 $row['last_avg_weight'] = $lastResult[$groupVal]['avg_weight'];
+                $row['last_real_freight_fee'] = $lastResult[$groupVal]['real_freight_fee'];
+                $row['last_avg_freight_fee'] = $lastResult[$groupVal]['avg_freight_fee'];
+                $row['last_avg_fee'] = $lastResult[$groupVal]['avg_fee'];
             }
             if ($thisResult[$groupVal]) {// 本期
                 $row[$groupField] = $groupVal;
                 $row['this_real_weight'] = $thisResult[$groupVal]['real_weight'];
                 $row['this_avg_weight'] = $thisResult[$groupVal]['avg_weight'];
+                $row['this_real_freight_fee'] = $lastResult[$groupVal]['real_freight_fee'];
+                $row['this_avg_freight_fee'] = $lastResult[$groupVal]['avg_freight_fee'];
+                $row['this_avg_fee'] = $lastResult[$groupVal]['avg_fee'];
             }
             // 增幅
             if ($row['last_real_weight']) {
                 $row['add_real_weight'] = number_format(($row['this_real_weight'] - $row['last_real_weight']) / $row['last_real_weight'], 4, '.', '') * 100 . '%';
+                $row['add_real_freight_fee'] = number_format(($row['this_real_freight_fee'] - $row['last_real_freight_fee']) / $row['last_real_freight_fee'], 4, '.', '') * 100 . '%';
             } else {
                 $row['add_real_weight'] = '100%';
             }

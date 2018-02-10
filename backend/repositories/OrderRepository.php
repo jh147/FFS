@@ -96,7 +96,9 @@ class OrderRepository extends RepositoryBase
     {
         $sqlObj = ShippingOrder::find()->where('1=1');
         $sqlObj = $this->handleConditions($sqlObj, $conditions);
-        return $sqlObj->select('flight_num, (sum(actual_weight) - sum(pg_weight)) as real_weight, ((sum(actual_weight) - sum(pg_weight))/:totalDays) as avg_weight')
+        return $sqlObj->select('flight_num, sum(actual_weight - pg_weight) as real_weight, (sum(actual_weight - pg_weight)/:totalDays) as avg_weight,
+        sum((billing_weight-pg_weight)*freight_rates+fuel_fee) as real_freight_fee, (sum((billing_weight-pg_weight)*freight_rates+fuel_fee)/:totalDays) as avg_freight_fee,
+        sum((billing_weight-pg_weight)*freight_rates+fuel_fee) / sum(actual_weight - pg_weight) as avg_fee')
             ->orderBy('real_weight desc')
             ->groupBy('flight_num')
             ->createCommand()
@@ -117,7 +119,9 @@ class OrderRepository extends RepositoryBase
             ->innerJoin('flight as f', 'f.flight_num = o.flight_num')
             ->where('1=1');
         $sqlObj = $this->handleConditions($sqlObj, $conditions);
-        return $sqlObj->select('f.air_line, (sum(actual_weight) - sum(pg_weight)) as real_weight, ((sum(actual_weight) - sum(pg_weight))/:totalDays) as avg_weight')
+        return $sqlObj->select('f.air_line, sum(actual_weight - pg_weight) as real_weight, (sum(actual_weight - pg_weight)/:totalDays) as avg_weight,
+        sum((billing_weight-pg_weight)*freight_rates+fuel_fee) as real_freight_fee, (sum((billing_weight-pg_weight)*freight_rates+fuel_fee)/:totalDays) as avg_freight_fee,
+        sum((billing_weight-pg_weight)*freight_rates+fuel_fee) / sum(actual_weight - pg_weight) as avg_fee')
             ->orderBy('real_weight desc')
             ->groupBy('f.air_line')
             ->createCommand()
@@ -138,7 +142,9 @@ class OrderRepository extends RepositoryBase
             ->innerJoin('agents as a', 'a.simple_code = o.simple_code')
             ->where('1=1');
         $sqlObj = $this->handleConditions($sqlObj, $conditions);
-        return $sqlObj->select('a.name, (sum(actual_weight) - sum(pg_weight)) as real_weight, ((sum(actual_weight) - sum(pg_weight))/:totalDays) as avg_weight')
+        return $sqlObj->select('a.name, sum(actual_weight - pg_weight) as real_weight, (sum(actual_weight - pg_weight)/:totalDays) as avg_weight,
+        sum((billing_weight-pg_weight)*freight_rates+fuel_fee) as real_freight_fee, (sum((billing_weight-pg_weight)*freight_rates+fuel_fee)/:totalDays) as avg_freight_fee,
+        sum((billing_weight-pg_weight)*freight_rates+fuel_fee) / sum(actual_weight - pg_weight) as avg_fee')
             ->orderBy('real_weight desc')
             ->groupBy('a.name')
             ->createCommand()
