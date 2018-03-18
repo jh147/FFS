@@ -111,7 +111,7 @@ $this->title = '周期销售对比';
         </div>
     </div>
     
-    <script type="text/template" id="flight_grid_template">
+    <script type="text/template" id="grid_template">
         <td class="align-c"><%- i %></td>
         <td><%- flight_num %></td>
         <td><%- last_real_weight %></td>
@@ -128,40 +128,6 @@ $this->title = '周期销售对比';
         <td><%- add_real_freight_fee%></td>
     </script>
     
-
-    <script type="text/template" id="airline_grid_template">
-        <td class="align-c"><%- i %></td>
-        <td><%- air_line %></td>
-        <td><%- last_real_weight %></td>
-        <td><%- last_avg_weight %></td>
-        <td><%- last_real_freight_fee%></td>
-        <td><%- last_avg_fee %></td>
-        <td><%- last_avg_freight_fee %></td>
-        <td><%- this_real_weight%></td>
-        <td><%- this_avg_weight%></td>
-        <td><%- this_real_freight_fee%></td>
-        <td><%- this_avg_fee%></td>
-        <td><%- this_avg_freight_fee %></td>
-        <td><%- add_real_weight%></td>
-        <td><%- add_real_freight_fee%></td>
-    </script>
-
-    <script type="text/template" id="agent_grid_template">
-        <td class="align-c"><%- i %></td>
-        <td><%- name %></td>
-        <td><%- last_real_weight %></td>
-        <td><%- last_avg_weight %></td>
-        <td><%- last_real_freight_fee%></td>
-        <td><%- last_avg_fee %></td>
-        <td><%- this_real_weight%></td>
-        <td><%- this_avg_weight%></td>
-        <td><%- this_real_freight_fee%></td>
-        <td><%- this_avg_freight_fee%></td>
-        <td><%- add_real_weight%></td>
-        <td><%- add_real_freight_fee%></td>
-    </script>
-
-
     
     <script type="text/javascript">
         seajs.use('/js/sales-compare/sales-statistics-index.js');
