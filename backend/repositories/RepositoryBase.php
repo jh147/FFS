@@ -118,6 +118,11 @@ abstract class RepositoryBase
                 $sqlObj->andFilterWhere(['<', $k, $v]);
             }
         }
+        if ($conditions['in']) {
+            foreach ($conditions['in'] as $k => $v) {
+                $sqlObj->andFilterWhere([$k => $v]);
+            }
+        }
 
         return $sqlObj;
     }

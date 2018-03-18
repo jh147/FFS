@@ -152,4 +152,55 @@ class OrderRepository extends RepositoryBase
             ->queryAll();
     }
 
+
+
+    /**
+     * 获取周期销售分析数据 - 航班
+     * @param $conditions
+     * @return array
+     */
+    public function getSalesStatisticsByFlight($conditions)
+    {
+        $sqlObj = ShippingOrder::find()->where('1=1');
+        $sqlObj = $this->handleConditions($sqlObj, $conditions);
+        return $sqlObj->select('flight_num as name, flight_date, sum(actual_weight - pg_weight) as real_weight')
+            ->groupBy('flight_num, flight_date')
+            ->createCommand()
+            ->queryAll();
+    }
+    /**
+     * 获取销售分析数据 - 航线
+     * @param $conditions
+     * @return array
+     */
+    public function getSalesStatisticsByAirline($conditions)
+    {
+        $sqlObj = ShippingOrder::find()
+            ->alias('o')
+            ->innerJoin('flight as f', 'f.flight_num = o.flight_num')
+            ->where('1=1');
+        $sqlObj = $this->handleConditions($sqlObj, $conditions);
+        return $sqlObj->select('f.air_line as name, o.flight_date, sum(actual_weight - pg_weight) as real_weight')
+            ->groupBy('f.air_line, o.flight_date')
+            ->createCommand()
+            ->queryAll();
+    }
+
+    /**
+     * 获取销售分析数据 - 代理人
+     * @param $conditions
+     * @return array
+     */
+    public function getSalesStatisticsByAgent($conditions)
+    {
+        $sqlObj = ShippingOrder::find()
+            ->alias('o')
+            ->innerJoin('agents as a', 'a.simple_code = o.simple_code')
+            ->where('1=1');
+        $sqlObj = $this->handleConditions($sqlObj, $conditions);
+        return $sqlObj->select('a.name, o.flight_date, sum(actual_weight - pg_weight) as real_weight')
+            ->groupBy('a.name, o.flight_date')
+            ->createCommand()
+            ->queryAll();
+    }
 }

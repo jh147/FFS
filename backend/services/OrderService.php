@@ -333,6 +333,7 @@ class OrderService extends ServiceBase
     }
 
     /**
+     * 日常营业
      * @param $page
      * @param $pageSize
      * @param $conditions
@@ -350,6 +351,7 @@ class OrderService extends ServiceBase
     }
 
     /**
+     * 周期销售对比
      * @param $conditions
      * @param $type
      * @param $totalDays
@@ -364,6 +366,22 @@ class OrderService extends ServiceBase
         }elseif($type == 'agent') {
             return $this->_respository->getSalesCompareByAgent($conditions, $totalDays);
         }
+    }
 
+    /**
+     * 周期销售分析
+     * @param $conditions
+     * @param $type
+     * @return array
+     */
+    public function getSalesStatistics($conditions, $type)
+    {
+        if ($type == 'flight') {
+            return $this->_respository->getSalesStatisticsByFlight($conditions);
+        }elseif($type == 'airline') {
+            return $this->_respository->getSalesStatisticsByAirline($conditions);
+        }elseif($type == 'agent') {
+            return $this->_respository->getSalesStatisticsByAgent($conditions);
+        }
     }
 }
