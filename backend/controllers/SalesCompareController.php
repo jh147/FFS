@@ -131,6 +131,9 @@ class SalesCompareController extends ControllerBase
         $data = [];
         foreach ($groupFieldArr as $groupVal) {
             $row = [];
+            $row['last_real_weight'] = $row['last_avg_weight'] = $row['last_real_freight_fee'] = $row['last_avg_freight_fee'] = $row['last_avg_fee'] = 0;
+            $row['this_real_weight'] = $row['this_avg_weight'] = $row['this_real_freight_fee'] = $row['this_avg_freight_fee'] = $row['this_avg_fee'] = 0;
+            $row['add_real_weight'] = $row['add_real_freight_fee'] = '0%';
 
             if ($lastResult[$groupVal]) {// 上期
                 $row[$groupField] = $groupVal;
@@ -152,8 +155,6 @@ class SalesCompareController extends ControllerBase
             if ($row['last_real_weight']) {
                 $row['add_real_weight'] = number_format(($row['this_real_weight'] - $row['last_real_weight']) / $row['last_real_weight'], 4, '.', '') * 100 . '%';
                 $row['add_real_freight_fee'] = number_format(($row['this_real_freight_fee'] - $row['last_real_freight_fee']) / $row['last_real_freight_fee'], 4, '.', '') * 100 . '%';
-            } else {
-                $row['add_real_weight'] = '100%';
             }
 
             $data[] = $row;

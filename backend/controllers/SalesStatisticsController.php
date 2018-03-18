@@ -8,16 +8,16 @@ use yii\filters\AccessControl;
 use backend\services\OrderService;
 
 /**
- * 销售分析
- * Class DailyBusinessController
+ * 周期销售分析
+ * Class SalesStatisticsController
  * @package backend\controllers
  */
-class SalesCompareController extends ControllerBase
+class SalesStatisticsController extends ControllerBase
 {
     private $_service;
 
     /**
-     * PgOrderController constructor.
+     * SalesStatisticsController constructor.
      * @param string $id
      * @param \yii\base\Module $module
      * @param OrderService $orderService
