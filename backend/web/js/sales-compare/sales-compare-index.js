@@ -92,6 +92,7 @@ define(function (require, exports, module) {
         });
     });
     
+    // initGrid('flight');
 
     var _uploadExcelInstance = null;
 
