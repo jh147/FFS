@@ -20,10 +20,7 @@ define(function (require, exports, module) {
             method: 'get',
             queryParams: function () {
                 return 'type='+compareType+'&'
-                        +'this_start_date='+$.trim($('#this_start_date').val())+'&'
-                        +'this_end_date='+$.trim($('#this_end_date').val())+'&'
-                        +'last_start_date='+$.trim($('#last_start_date').val())+'&'
-                        +'last_end_date='+$.trim($('#last_end_date').val());
+                        +'date='+$.trim($('#date').val());
             },
             beforeRender: function(){
                 
