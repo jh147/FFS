@@ -85,8 +85,8 @@ class ShipmentStatisticsController extends ControllerBase
         $groupBy[] = 'flight_date';
         $groupBy[] = Yii::$app->request->get('flight_num') ? 'flight_num' : '';
         $groupBy[] = Yii::$app->request->get('destination_station') ? 'destination_station' : '';
-        $groupBy[] = Yii::$app->request->get('freight_rates_code') ? 'freight_rates_code' : '';
         $groupBy[] = Yii::$app->request->get('agent') ? 'simple_code' : '';
+        $groupBy[] = Yii::$app->request->get('freight_rates_code') ? 'freight_rates_code' : '';
         $groupBy = array_filter($groupBy);
 
         $conditions['geq']['flight_date'] = Yii::$app->request->get('start_date');
