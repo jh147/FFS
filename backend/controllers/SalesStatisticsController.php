@@ -101,9 +101,8 @@ class SalesStatisticsController extends ControllerBase
         $conditions['in']['flight_date'] = $dateTime;
         $result = $this->_service->getSalesStatistics($conditions, $type);
         $result = $this->mergeStatisticsData($dateTime, $result);
-        //print_r($result);exit;
 
-        return $this->asJson($result);
+        return $this->asJson(['items' => $result, 'total' => 1]);
     }
 
     /**

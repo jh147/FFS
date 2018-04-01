@@ -96,7 +96,7 @@ class SalesCompareController extends ControllerBase
         $thisResult = $this->_service->getSalesCompare($conditions, $type, $totalDays);
 
         $result = $this->mergeSalesCompare($lastResult, $thisResult, $type);
-        return $this->asJson($result);
+        return $this->asJson(['items' => $result, 'total' => 1]);
     }
 
     /**
