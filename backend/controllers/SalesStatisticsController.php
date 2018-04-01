@@ -82,7 +82,7 @@ class SalesStatisticsController extends ControllerBase
     public function actionAjaxGetList()
     {
         $type = Yii::$app->request->get('type');
-        $dateTime[] = $flightDate = Yii::$app->request->get('flight_date');//当前选择的航班日期
+        $dateTime[] = $flightDate = Yii::$app->request->get('date');//当前选择的日期
 
         $dateTime[] = $lastYearflightDate = $this->getDateByLastYear($flightDate);//去年同一天
         $dateTime[] = $lastMonthflightDate = $this->getDateByLastMonth($flightDate);//上个月同一天
