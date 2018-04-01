@@ -384,4 +384,25 @@ class OrderService extends ServiceBase
             return $this->_respository->getSalesStatisticsByAgent($conditions);
         }
     }
+
+
+    /**
+     * 货源分析
+     * @param $conditions
+     * @return array
+     */
+    public function getGoodsStatisticsList($conditions)
+    {
+        return $this->_respository->getGoodsStatisticsList($conditions);
+    }
+
+    /**
+     * 出货分析
+     * @param $conditions
+     * @return array
+     */
+    public function getShipmentStatisticsList($conditions)
+    {
+        return $this->_respository->getShipmentStatisticsList($conditions);
+    }
 }

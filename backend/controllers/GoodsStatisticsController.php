@@ -4,10 +4,10 @@ namespace backend\controllers;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use backend\services\GoodsService;
-use yii\web\UploadedFile;
+use backend\services\OrderService;
 
 /**
+ * 货源分析
  * Goods controller
  */
 class GoodsStatisticsController extends ControllerBase
@@ -15,15 +15,15 @@ class GoodsStatisticsController extends ControllerBase
     private $_service;
 
     /**
-     * GoodsController constructor.
+     * GoodsStatisticsController constructor.
      * @param string $id
      * @param \yii\base\Module $module
-     * @param GoodsService $goodsService
+     * @param OrderService $orderService
      * @param array $config
      */
-    public function __construct($id, $module, GoodsService $goodsService, $config = [])
+    public function __construct($id, $module, OrderService $orderService, $config = [])
     {
-        $this->_service = $goodsService;
+        $this->_service = $orderService;
         parent::__construct($id, $module, $config);
     }
 
@@ -81,7 +81,16 @@ class GoodsStatisticsController extends ControllerBase
      */
     public function actionAjaxGetList()
     {
-        
+        $conditions = [];
+        $conditions['like']['flight_num'] = Yii::$app->request->get('flight_num');
+        $conditions['like']['destination_station'] = Yii::$app->request->get('destination_station');
+        $conditions['like']['freight_rates_code'] = Yii::$app->request->get('freight_rates_code');
+        $conditions['geq']['flight_date'] = Yii::$app->request->get('start_date');
+        $conditions['leq']['flight_date'] = Yii::$app->request->get('end_date');
+        $conditions['like']['simple_code'] = Yii::$app->request->get('agent');
+        $result = $this->_service->getGoodsStatisticsList($conditions);
+
+        return $this->asJson(['items' => $result, 'total' => 1]);
     }
    
 }

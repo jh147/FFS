@@ -203,4 +203,38 @@ class OrderRepository extends RepositoryBase
             ->createCommand()
             ->queryAll();
     }
+
+    /**
+     * 获取货源分析列表
+     * @param $conditions
+     * @return array
+     */
+    public function getGoodsStatisticsList($conditions)
+    {
+        $sqlObj = ShippingOrder::find()->where('1=1');
+        $sqlObj = $this->handleConditions($sqlObj, $conditions);
+        $items = $sqlObj->orderBy(['created_on' => SORT_DESC])
+            ->createCommand()
+            ->queryAll();
+
+        return ['items' => $items, 'total' => 1];
+    }
+
+    /**
+     * 获取出货分析列表
+     * @param $conditions
+     * @return array
+     */
+    public function getShipmentStatisticsList($conditions)
+    {
+        $sqlObj = ShippingOrder::find()->where('1=1');
+        $sqlObj = $this->handleConditions($sqlObj, $conditions);
+        $items = $sqlObj->select('flight_date, flight_num, simple_code, freight_rates_code, start_station, destination_station, sum(quantity-pg_quantity) as sum_quantity, sum(actual_weight - pg_weight) as sum_weight, sum((billing_weight-pg_weight)*freight_rates+fuel_fee) as real_freight_fee, avg((billing_weight-pg_weight)*freight_rates+fuel_fee) as avg_freight_fee')
+            ->orderBy(['flight_date' => SORT_DESC])
+            ->groupBy(['flight_date', 'flight_num', 'simple_code', 'freight_rates_code', 'destination_station'])
+            ->createCommand()
+            ->queryAll();
+
+        return ['items' => $items, 'total' => 1];
+    }
 }
