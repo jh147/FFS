@@ -104,8 +104,8 @@ AppAsset::register($this);
                     <dd class="<?php if($this->title == '周期销售对比'){ echo 'on';} ?>">
                         <a href="/sales-compare/index">周期销售对比</a>
                     </dd>
-                    <dd>
-                        <a href="javascript:;">周期销售分析</a>
+                    <dd class="<?php if($this->title == '周期销售分析'){ echo 'on';} ?>">
+                        <a href="/sales-statistics/index">周期销售分析</a>
                     </dd>
                     <dd>
                         <a href="javascript:;">周期运价分析</a>

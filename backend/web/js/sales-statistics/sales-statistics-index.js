@@ -7,11 +7,11 @@ define(function (require, exports, module) {
     var grid = null;
     var compareType = 'flight';
 
-    function initGrid(id){
-        return $('#sales_statistics_'+id+'_grid').grid({
-            url: '/sales-compare/ajax-get-list',
+    function initGrid(){
+        return $('#grid').grid({
+            url: '/sales-statistics/ajax-get-list',
             idField: 'id',
-            templateid: id+'_grid_template',
+            templateid: 'grid_template',
             pagesize: 20,
             scrollLoad: false,
             setEmptyText: function () {
@@ -24,20 +24,13 @@ define(function (require, exports, module) {
                         +'this_end_date='+$.trim($('#this_end_date').val())+'&'
                         +'last_start_date='+$.trim($('#last_start_date').val())+'&'
                         +'last_end_date='+$.trim($('#last_end_date').val());
+            },
+            beforeRender: function(){
+                
             }
         });
     }
 
-    function paramsValidate(){
-        var validate = true;
-        $.each(['last_start_date', 'last_end_date', 'this_start_date', 'this_end_date'], function(i, id){
-            if(!$('#'+id).val()){
-                validate = false;
-                return false;
-            }
-        })
-        return validate;
-    }
 
     $('#statistics-type').selectBox({
         options: [
@@ -65,9 +58,9 @@ define(function (require, exports, module) {
         }
     });
 
-    $('#date'+id).click(function(){
+    $('#date').click(function(){
         laydate({
-            elem: '#'+id,
+            elem: '#date',
             format: 'YYYY-MM-DD',
             istime: true,
             isclear: true
@@ -76,14 +69,13 @@ define(function (require, exports, module) {
 
     // 搜索
     $('#search').click(function(){
-        if(!paramsValidate()){
-            return showMessage('请填写完整的查询条件');
+        if(grid){
+            grid.refresh();
+        }else{
+            grid = initGrid();
         }
-        
     });
 
-    
-    
 
     var _uploadExcelInstance = null;
 

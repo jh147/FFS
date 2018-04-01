@@ -12,7 +12,7 @@ $this->title = '周期销售对比';
         </li>
         
         <li class="search-inline">
-            <span>上期</span>
+            <span>日期</span>
             <input type="text" readonly="readonly" class="form-control Wdate" id="date" style="width:130px;">
         </li>
         <li>
@@ -22,17 +22,11 @@ $this->title = '周期销售对比';
     </ul>
 
     <div class="grid">
-        <div class="grid-content" id="sales_compare_flight_grid">
+        <div class="grid-content" id="grid">
             <table class="table form">
                 <thead>
                     <tr>
-                        <th width="60" class="align-c" rowspan=2 style="vertical-align: middle;border-right: 1px solid #e7e6eb;">排名</th>
-                        <th rowspan="2" class="align-c" style="vertical-align: middle;border-right: 1px solid #e7e6eb;">航班号</th>
-                        <th colspan="5" class="align-c" style="vertical-align: middle;border-right: 1px solid #e7e6eb;">上期</th>
-                        <th colspan="5" class="align-c" style="vertical-align: middle;border-right: 1px solid #e7e6eb;">本期</th>
-                        <th colspan="2" class="align-c">增幅</th>
-                    </tr>
-                    <tr>
+                        <th width="60" class="align-c">排名</th>
                         <th>货量</th>
                         <th>日均货量</th>
                         <th>收益</th>
@@ -130,6 +124,6 @@ $this->title = '周期销售对比';
     
     
     <script type="text/javascript">
-        seajs.use('/js/sales-compare/sales-statistics-index.js');
+        seajs.use('/js/sales-statistics/sales-statistics-index.js');
     </script>
 </div>
