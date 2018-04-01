@@ -22,7 +22,11 @@ define(function (require, exports, module) {
                 return 'type='+compareType+'&'
                         +'date='+$.trim($('#date').val());
             },
-            beforeRender: function(){
+            beforeRender: function(models){
+                var tableTitles = models.shift();
+                $('#grid tr:eq(0) th').each(function(i){
+                    $(this).text(tableTitles.get('time'+i))
+                });
                 
             }
         });
@@ -66,6 +70,9 @@ define(function (require, exports, module) {
 
     // 搜索
     $('#search').click(function(){
+        if(!$.trim($('#date').val())){
+            return showMessage('请选择日期');
+        }
         if(grid){
             grid.refresh();
         }else{

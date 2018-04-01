@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = '周期销售分析';
+$this->title = '出货分析';
 ?>
 <style type="text/css">
     .table>thead>tr>th{
@@ -12,13 +12,26 @@ $this->title = '周期销售分析';
 <div>
     <ul class="search-con clearfix">
         <li>
-            <span>对比维度</span>
+            <span>航班号</span>
             <input type="text" class="form-control" placeholder="" style="width:150px;" id="statistics-type">
         </li>
-        
+        <li>
+            <span>目的站</span>
+            <input type="text" class="form-control" placeholder="" style="width:150px;" id="statistics-type">
+        </li>
+        <li>
+            <span>代理人</span>
+            <input type="text" class="form-control" placeholder="" style="width:150px;" id="statistics-type">
+        </li>
+        <li>
+            <span>运价代码</span>
+            <input type="text" class="form-control" placeholder="" style="width:150px;" id="statistics-type">
+        </li>
         <li class="search-inline">
             <span>日期</span>
-            <input type="text" readonly="readonly" class="form-control Wdate" id="date" style="width:130px;">
+            <input type="text" readonly="readonly" class="form-control Wdate" id="start_date_1" style="width:130px;">
+            <span class="inline-sep" style="margin-right: auto">-</span>
+            <input type="text" readonly="readonly" class="form-control Wdate" id="end_date_1" style="width:130px;">
         </li>
         <li>
             <span>&nbsp;</span>
@@ -30,16 +43,16 @@ $this->title = '周期销售分析';
             <table class="table form">
                 <thead>
                     <tr>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
+                        <th>序号</th>
+                        <th>日期</th>
+                        <th>航班号</th>
+                        <th>目的站</th>
+                        <th>代理人</th>
+                        <th>运价代码</th>
+                        <th>件数</th>
+                        <th>货量</th>
+                        <th>运费</th>
+                        <th>平均运价</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,6 +79,6 @@ $this->title = '周期销售分析';
     
     
     <script type="text/javascript">
-        seajs.use('/js/sales-statistics/sales-statistics-index.js');
+        seajs.use('/js/shipment-statistics/index.js');
     </script>
 </div>

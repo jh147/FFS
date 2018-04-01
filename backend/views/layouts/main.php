@@ -110,6 +110,12 @@ AppAsset::register($this);
                     <dd>
                         <a href="javascript:;">周期运价分析</a>
                     </dd>
+                    <dd class="<?php if($this->title == '货源分析'){ echo 'on';} ?>">
+                        <a href="/goods-statistics/index">货源分析</a>
+                    </dd>
+                    <dd class="<?php if($this->title == '出货分析'){ echo 'on';} ?>">
+                        <a href="/shipment-statistics/index">出货分析</a>
+                    </dd>
                 </dl>
             </div>
             <!-- 菜单 ]]-->

@@ -721,7 +721,7 @@ define(function (require, exports, module) {
                     return false;
                 }
 
-                if(beforeRender && beforeRender.call(this, options.response, {
+                if(beforeRender && beforeRender.call(this, collection.models, {
                     currPage: _currpage,
                     totalPage: _pages
                 }) === false) {
