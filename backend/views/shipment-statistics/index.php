@@ -13,25 +13,25 @@ $this->title = '出货分析';
     <ul class="search-con clearfix">
         <li>
             <span>航班号</span>
-            <input type="text" class="form-control" placeholder="" style="width:150px;" id="statistics-type">
+            <input type="text" class="form-control" placeholder="" style="width:150px;" id="flight_num">
         </li>
         <li>
             <span>目的站</span>
-            <input type="text" class="form-control" placeholder="" style="width:150px;" id="statistics-type">
+            <input type="text" class="form-control" placeholder="" style="width:150px;" id="destination_station">
         </li>
         <li>
             <span>代理人</span>
-            <input type="text" class="form-control" placeholder="" style="width:150px;" id="statistics-type">
+            <input type="text" class="form-control" placeholder="" style="width:150px;" id="agent">
         </li>
         <li>
             <span>运价代码</span>
-            <input type="text" class="form-control" placeholder="" style="width:150px;" id="statistics-type">
+            <input type="text" class="form-control" placeholder="" style="width:150px;" id="freight_rates_code">
         </li>
         <li class="search-inline">
             <span>日期</span>
-            <input type="text" readonly="readonly" class="form-control Wdate" id="start_date_1" style="width:130px;">
+            <input type="text" readonly="readonly" class="form-control Wdate" id="start_date" style="width:130px;">
             <span class="inline-sep" style="margin-right: auto">-</span>
-            <input type="text" readonly="readonly" class="form-control Wdate" id="end_date_1" style="width:130px;">
+            <input type="text" readonly="readonly" class="form-control Wdate" id="end_date" style="width:130px;">
         </li>
         <li>
             <span>&nbsp;</span>

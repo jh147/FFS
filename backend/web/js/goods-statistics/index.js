@@ -16,8 +16,15 @@ define(function (require, exports, module) {
             },
             method: 'get',
             queryParams: function () {
-                return 'type='+compareType+'&'
-                        +'date='+$.trim($('#date').val());
+                return 'flight_num='+$.trim($('#flight_num').val())+'&'
+                        +'destination_station='+$.trim($('#destination_station').val())+'&'
+                        +'freight_rates_code='+$.trim($('#freight_rates_code').val())+'&'
+                        +'start_date_1='+$.trim($('#start_date_1').val())+'&'
+                        +'end_date_1='+$.trim($('#end_date_1').val())+'&'
+                        +'start_date_2='+$.trim($('#start_date_2').val())+'&'
+                        +'end_date_2='+$.trim($('#end_date_2').val())+'&'
+                        +'start_date_3='+$.trim($('#start_date_3').val())+'&'
+                        +'end_date_3='+$.trim($('#end_date_3').val());
             }
         });
     }

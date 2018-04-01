@@ -12,16 +12,16 @@ $this->title = '货源分析';
 <div>
     <ul class="search-con clearfix">
         <li>
-            <span>目的站</span>
-            <input type="text" class="form-control" placeholder="" style="width:150px;" id="statistics-type">
+            <span>航班号</span>
+            <input type="text" class="form-control" placeholder="" style="width:150px;" id="flight_num">
         </li>
         <li>
-            <span>航班号</span>
-            <input type="text" class="form-control" placeholder="" style="width:150px;" id="statistics-type">
+            <span>目的站</span>
+            <input type="text" class="form-control" placeholder="" style="width:150px;" id="destination_station">
         </li>
         <li>
             <span>运价代吗</span>
-            <input type="text" class="form-control" placeholder="" style="width:150px;" id="statistics-type">
+            <input type="text" class="form-control" placeholder="" style="width:150px;" id="freight_rates_code">
         </li>
         <li class="search-inline">
             <span>本期</span>
