@@ -16,12 +16,23 @@ define(function (require, exports, module) {
             },
             method: 'get',
             queryParams: function () {
-                return  'flight_num='+$.trim($('#flight_num').val())+'&'
-                        +'destination_station='+$.trim($('#destination_station').val())+'&'
-                        +'agent='+$.trim($('#agent').val())+'&'
-                        +'freight_rates_code='+$.trim($('#freight_rates_code').val())+'&'
-                        +'start_date='+$.trim($('#start_date').val())+'&'
+                var queryParams = 'start_date='+$.trim($('#start_date').val())+'&'
                         +'end_date='+$.trim($('#end_date').val());
+                $('.selected').each(function(){
+                    queryParams += '&'+$(this).find('.form-checkbox-input').attr('id')+'=1'
+                });
+                console.log(queryParams);
+                return queryParams;
+            },
+            loaded: function(){
+                $('.form-checkbox').each(function(){
+                    if($(this).hasClass('selected')){
+                        $('.'+$(this).find('.form-checkbox-input').attr('id')).show();
+                    }else{
+                        $('.'+$(this).find('.form-checkbox-input').attr('id')).hide();
+                    }
+                    
+                });
             }
         });
     }
@@ -59,6 +70,11 @@ define(function (require, exports, module) {
         }else{
             grid = initGrid();
         }
+    });
+
+    $('.form-checkbox').click(function(){
+        $(this).toggleClass('selected');
+        $('#search').trigger('click');
     });
 
     function showMessage(message, isNormal, delay) {

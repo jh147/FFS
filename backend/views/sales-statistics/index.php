@@ -50,7 +50,6 @@ $this->title = '周期销售分析';
     </div>
     
     <script type="text/template" id="grid_template">
-        <td class="align-c"><%- i %></td>
         <td><%- real_weight0 %></td>
         <td><%- real_weight1 %></td>
         <td><%- real_weight2 %></td>
