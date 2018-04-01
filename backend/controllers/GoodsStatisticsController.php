@@ -101,6 +101,12 @@ class GoodsStatisticsController extends ControllerBase
         return $this->asJson(['items' => $this->mergeResult($result1, $result2, $result3), 'total' => 1]);
     }
 
+    /**
+     * @param $result1
+     * @param $result2
+     * @param $result3
+     * @return array
+     */
     private function mergeResult($result1, $result2, $result3)
     {
         $flightNum1 = ArrayHelper::getColumn($result1, 'flight_num');
@@ -108,9 +114,45 @@ class GoodsStatisticsController extends ControllerBase
         $flightNum3 = ArrayHelper::getColumn($result3, 'flight_num');
         $flightNumArr = array_merge($flightNum1, $flightNum2, $flightNum3);
 
-//        $result1 = array_
-//        foreach ($flightNumArr as $flightNum) {
-//
-//        }
+        $result1 = ArrayHelper::group($result1, 'flight_num');
+        $result2 = ArrayHelper::group($result2, 'flight_num');
+        $result3 = ArrayHelper::group($result3, 'flight_num');
+        $data = [];
+        foreach ($flightNumArr as $flightNum) {
+            if ($result1[$flightNum]) {
+                foreach ($result1[$flightNum] as $item1) {
+                    $data[$flightNum][$item1['start_station']][$item1['destination_station']][$item1['freight_rates_code']]['flight_num'] = $flightNum;
+                    $data[$flightNum][$item1['start_station']][$item1['destination_station']][$item1['freight_rates_code']]['start_station'] = $item1['start_station'];
+                    $data[$flightNum][$item1['start_station']][$item1['destination_station']][$item1['freight_rates_code']]['destination_station'] = $item1['destination_station'];
+
+                    $data[$flightNum][$item1['start_station']][$item1['destination_station']][$item1['freight_rates_code']]['sum_weight_1'] = $item1['sum_weight'];
+                    $data[$flightNum][$item1['start_station']][$item1['destination_station']][$item1['freight_rates_code']]['real_freight_fee_1'] = $item1['real_freight_fee'];
+                    $data[$flightNum][$item1['start_station']][$item1['destination_station']][$item1['freight_rates_code']]['avg_freight_fee_1'] = $item1['avg_freight_fee'];
+                }
+            }
+            if ($result2[$flightNum]) {
+                foreach ($result2[$flightNum] as $item2) {
+                    $data[$flightNum][$item2['start_station']][$item2['destination_station']][$item2['freight_rates_code']]['flight_num'] = $flightNum;
+                    $data[$flightNum][$item2['start_station']][$item2['destination_station']][$item2['freight_rates_code']]['start_station'] = $item2['start_station'];
+                    $data[$flightNum][$item2['start_station']][$item2['destination_station']][$item2['freight_rates_code']]['destination_station'] = $item2['destination_station'];
+
+                    $data[$flightNum][$item2['start_station']][$item2['destination_station']][$item2['freight_rates_code']]['sum_weight_2'] = $item2['sum_weight'];
+                    $data[$flightNum][$item2['start_station']][$item2['destination_station']][$item2['freight_rates_code']]['real_freight_fee_2'] = $item2['real_freight_fee'];
+                    $data[$flightNum][$item2['start_station']][$item2['destination_station']][$item2['freight_rates_code']]['avg_freight_fee_2'] = $item2['avg_freight_fee'];
+                }
+            }
+            if ($result3[$flightNum]) {
+                foreach ($result3[$flightNum] as $item3) {
+                    $data[$flightNum][$item3['start_station']][$item3['destination_station']][$item3['freight_rates_code']]['flight_num'] = $flightNum;
+                    $data[$flightNum][$item3['start_station']][$item3['destination_station']][$item3['freight_rates_code']]['start_station'] = $item3['start_station'];
+                    $data[$flightNum][$item3['start_station']][$item3['destination_station']][$item3['freight_rates_code']]['destination_station'] = $item3['destination_station'];
+
+                    $data[$flightNum][$item3['start_station']][$item3['destination_station']][$item3['freight_rates_code']]['sum_weight_3'] = $item3['sum_weight'];
+                    $data[$flightNum][$item3['start_station']][$item3['destination_station']][$item3['freight_rates_code']]['real_freight_fee_3'] = $item3['real_freight_fee'];
+                    $data[$flightNum][$item3['start_station']][$item3['destination_station']][$item3['freight_rates_code']]['avg_freight_fee_3'] = $item3['avg_freight_fee'];
+                }
+            }
+        }
+        return $data;
     }
 }
