@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use common\utils\ArrayHelper;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -85,12 +86,31 @@ class GoodsStatisticsController extends ControllerBase
         $conditions['like']['flight_num'] = Yii::$app->request->get('flight_num');
         $conditions['like']['destination_station'] = Yii::$app->request->get('destination_station');
         $conditions['like']['freight_rates_code'] = Yii::$app->request->get('freight_rates_code');
-        $conditions['geq']['flight_date'] = Yii::$app->request->get('start_date');
-        $conditions['leq']['flight_date'] = Yii::$app->request->get('end_date');
-        $conditions['like']['simple_code'] = Yii::$app->request->get('agent');
-        $result = $this->_service->getGoodsStatisticsList($conditions);
+        $conditions['geq']['flight_date'] = Yii::$app->request->get('start_date_1');
+        $conditions['leq']['flight_date'] = Yii::$app->request->get('end_date_1');
+        $result1 = $this->_service->getGoodsStatisticsList($conditions);
 
-        return $this->asJson(['items' => $result, 'total' => 1]);
+        $conditions['geq']['flight_date'] = Yii::$app->request->get('start_date_2');
+        $conditions['leq']['flight_date'] = Yii::$app->request->get('end_date_2');
+        $result2 = $this->_service->getGoodsStatisticsList($conditions);
+
+        $conditions['geq']['flight_date'] = Yii::$app->request->get('start_date_3');
+        $conditions['leq']['flight_date'] = Yii::$app->request->get('end_date_3');
+        $result3 = $this->_service->getGoodsStatisticsList($conditions);
+
+        return $this->asJson(['items' => $this->mergeResult($result1, $result2, $result3), 'total' => 1]);
     }
-   
+
+    private function mergeResult($result1, $result2, $result3)
+    {
+        $flightNum1 = ArrayHelper::getColumn($result1, 'flight_num');
+        $flightNum2 = ArrayHelper::getColumn($result2, 'flight_num');
+        $flightNum3 = ArrayHelper::getColumn($result3, 'flight_num');
+        $flightNumArr = array_merge($flightNum1, $flightNum2, $flightNum3);
+
+//        $result1 = array_
+//        foreach ($flightNumArr as $flightNum) {
+//
+//        }
+    }
 }

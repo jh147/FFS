@@ -82,16 +82,19 @@ class ShipmentStatisticsController extends ControllerBase
     public function actionAjaxGetList()
     {
         $conditions = [];
-        $conditions['like']['flight_num'] = Yii::$app->request->get('flight_num');
-        $conditions['like']['destination_station'] = Yii::$app->request->get('destination_station');
-        $conditions['like']['freight_rates_code'] = Yii::$app->request->get('freight_rates_code');
+        $groupBy[] = 'flight_date';
+        $groupBy[] = Yii::$app->request->get('flight_num') ? 'flight_num' : '';
+        $groupBy[] = Yii::$app->request->get('destination_station') ? 'destination_station' : '';
+        $groupBy[] = Yii::$app->request->get('freight_rates_code') ? 'freight_rates_code' : '';
+        $groupBy[] = Yii::$app->request->get('agent') ? 'simple_code' : '';
+        $groupBy = array_filter($groupBy);
+
         $conditions['geq']['flight_date'] = Yii::$app->request->get('start_date');
         $conditions['leq']['flight_date'] = Yii::$app->request->get('end_date');
-        $conditions['like']['simple_code'] = Yii::$app->request->get('agent');
 
-        $result = $this->_service->getShipmentStatisticsList($conditions);
+        $result = $this->_service->getShipmentStatisticsList($conditions, $groupBy);
 
         return $this->asJson($result);
     }
-   
+
 }

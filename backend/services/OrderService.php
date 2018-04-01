@@ -399,10 +399,11 @@ class OrderService extends ServiceBase
     /**
      * 出货分析
      * @param $conditions
+     * @param $groupBy
      * @return array
      */
-    public function getShipmentStatisticsList($conditions)
+    public function getShipmentStatisticsList($conditions, $groupBy)
     {
-        return $this->_respository->getShipmentStatisticsList($conditions);
+        return $this->_respository->getShipmentStatisticsList($conditions, $groupBy);
     }
 }
