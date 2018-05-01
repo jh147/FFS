@@ -101,6 +101,11 @@ class ShippingOrderController extends ControllerBase
         $conditions['geq']['flight_date'] = Yii::$app->request->get('start_date');
         $conditions['leq']['flight_date'] = Yii::$app->request->get('end_date');
         $conditions['like']['order_num'] = Yii::$app->request->get('order_num');
+        $conditions['like']['start_station'] = Yii::$app->request->get('start_station');
+        $conditions['like']['destination_station'] = Yii::$app->request->get('destination_station');
+        $conditions['like']['flight_num'] = Yii::$app->request->get('flight_num');
+        $conditions['like']['freight_rates_code'] = Yii::$app->request->get('freight_rates_code');
+
         $result = $this->_service->getList($page, $pageSize, $conditions);
 
         return $this->asJson($result);
